@@ -65,7 +65,7 @@ function SignUpForm() {
     <div className="font-[sans-serif] pb-16 flex flex-col justify-center  items-center  px-5">
       <div className="flex items-center space-x-3 py-10">
         <MdMoney size={30} />
-        <h1 className="text-gray-300 text-xl font-semibold">Purse</h1>
+        <h1 className="text-gray-300 text-xl font-semibold">Pennywise</h1>
       </div>
       <div className="w-full max-w-4xl mx-auto lg:border dark:lg:border-gray-800 rounded-md">
         <div className="grid md:grid-cols-2 lg:gap-24 gap-16 w-full sm:p-8 p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded overflow-hidden">

@@ -78,7 +78,7 @@ const Expenses = () => {
   const [expenses, setExpenses] = useState<any[]>([]); // State to store threads
   const [timeFilter, setTimeFilter] = useState<string | null>(null);
   const [searchCategory, setSearchCategory] = useState<string | null>(null);
-  const user = session?.user;
+  const user: User = session?.user;
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof expenseSchema>>({
@@ -212,7 +212,7 @@ const Expenses = () => {
     const month = date.getUTCMonth() + 1; // Months are zero-based
     const year = date.getUTCFullYear();
 
-    // Return the formatted date as '10/9/2024' (day/month/year)
+    // Return the formatted date as '17/6/2025' (day/month/year)
     return `${day}/${month}/${year}`;
   };
 

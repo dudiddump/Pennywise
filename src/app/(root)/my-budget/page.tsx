@@ -176,7 +176,7 @@ const CreateCard = ({ fetchUserBudgets }: { fetchUserBudgets: () => void }) => {
 const MyBudget = () => {
   const [budgetCategories, setBudgetCategories] = useState<any>({});
   const { data: session } = useSession();
-  const user = session?.user;
+  const user: User = session?.user;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [newLimit, setNewLimit] = useState<number | null>(null);
   const { toast } = useToast();
@@ -275,7 +275,7 @@ const MyBudget = () => {
   return (
     <div className="flex flex-col pb-10">
       <h1 className="mx-auto lg:ml-10 lg:py-5 py-2 text-lg md:text-xl font-bold">
-        Augest, 2024
+        June, 2025
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-center items-center mx-auto">
         <CreateCard fetchUserBudgets={fetchUserBudgets} />
@@ -323,7 +323,7 @@ const MyBudget = () => {
                     <td className="px-6 py-4 text-blue-400">
                       <Dialog>
                         <DialogTrigger asChild>
-                          <FiEdit3 className="cursor-pointer text-blue-500" size={20} />
+                          <FiEdit3 className="cursor-pointer" size={20} />
                         </DialogTrigger>
                         <DialogContent className="w-full">
                           <DialogHeader>

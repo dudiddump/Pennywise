@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/options";
+import { authOptions } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
 

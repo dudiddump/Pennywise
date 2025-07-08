@@ -70,7 +70,7 @@ function SignInForm() {
           <div className="relative w-8 h-8">
             <MdMoney size={30}/>
           </div>
-          <h1 className="text-gray-600 text-xl dark:text-gray-300 font-semibold">Purse</h1>
+          <h1 className="text-gray-600 text-xl dark:text-gray-300 font-semibold">Pennywise</h1>
         </div>
       </div>
       <div className="w-full max-w-4xl mx-auto">

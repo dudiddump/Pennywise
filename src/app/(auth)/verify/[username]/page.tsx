@@ -70,7 +70,7 @@ const VerifyAccount = () => {
     <div className="flex flex-col justify-center items-center min-h-screen">
       <div className="flex items-center space-x-3 py-10">
         <MdMoney size={30} className="dark:text-gray-200" />
-        <h1 className="text-gray-600 dark:text-gray-200 text-xl font-semibold">WealthLens</h1>
+        <h1 className="text-gray-600 dark:text-gray-200 text-xl font-semibold">Pennywise</h1>
       </div>
       <div className="w-full max-w-md p-8 space-y-8 rounded-lg border-2 border-gray-600 shadow-lg">
         <div className="text-center">

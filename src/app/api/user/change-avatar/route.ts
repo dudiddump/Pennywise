@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import { getServerSession, User } from "next-auth";
-import { authOptions } from "@/app/api/auth/options";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import mongoose from "mongoose";
 import UserModel from "@/model/User";
 import { uploadToCloudinary } from "@/helpers/uploadToCloudinary";
