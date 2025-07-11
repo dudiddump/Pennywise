@@ -61,7 +61,7 @@ export default function LandingPage() {
             >
               <div className="flex justify-center items-center space-x-3 mb-8">
                 <MdMoney className="h-12 w-12 text-blue-500" />
-                <h1 className="text-4xl font-bold text-white">Purse</h1>
+                <h1 className="text-4xl font-bold text-white">Pennywise</h1>
               </div>
               <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
                 Smart Money,
@@ -140,7 +140,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
           <div className="flex justify-center space-x-6 md:order-2">
             <p className="text-center text-xs leading-5 text-gray-400">
-              © 2024 WealthLens. All rights reserved.
+              © 2025 Pennywise. All rights reserved.
             </p>
           </div>
         </div>
