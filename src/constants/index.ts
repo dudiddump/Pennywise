@@ -29,6 +29,11 @@ export const sidebarLinks = [
     route: "/my-profile",
     label: "My Profile",
   },
+  {
+    imgURL: "/icons/chatbot.svg",
+    route: "/my-ai-chat",
+    label: "AI Chatbot",
+  },
 ];
 
 export const months: string[] = [
