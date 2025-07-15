@@ -2,7 +2,7 @@
 
 import BudgetCard from "@/components/BudgetCard";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Added CardHeader, CardTitle for consistency
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FiEdit3 } from "react-icons/fi";
 import {
   Dialog,
@@ -30,9 +30,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Loader, Loader2, ChevronLeft, ChevronRight, CalendarDays, Wallet, DollarSign, PiggyBank } from "lucide-react"; // Removed Plus icon as FAB is gone
+import { Loader, Loader2, ChevronLeft, ChevronRight, CalendarDays, Wallet, DollarSign, PiggyBank } from "lucide-react"; // Added Wallet, DollarSign, PiggyBank icons
 import { User } from "next-auth";
-import { useSession } from "next-auth/react"; // FIX: Changed '= from' to 'from'
+import { useSession } from "next-auth/react"; // FIX: Corrected import syntax
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {
   AlertDialog,
@@ -222,7 +222,6 @@ const MyBudget = () => {
   const [newLimit, setNewLimit] = useState<number | null>(null);
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
-  // Removed isCreateDialogOpen state as it's no longer needed for a separate FAB
 
   // State for current month/year navigation
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -423,19 +422,22 @@ const MyBudget = () => {
               <span className="ml-3 text-lg text-gray-600 dark:text-gray-400">Loading Budgets...</span>
             </div>
           )}
-          {!loading && budgetCategories?.categories?.length === 0 && (
+          {/* FIX: Changed conditional rendering to use Array.isArray */}
+          {!loading && Array.isArray(budgetCategories?.categories) && budgetCategories.categories.length === 0 && (
             <div className="w-full text-center py-12 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-inner text-gray-500 dark:text-gray-400">
               <p className="text-xl font-semibold">No Budget Categories available yet.</p>
               <p className="text-lg mt-3">Click the "Create New Budget" card to get started!</p>
             </div>
           )}
-          {!loading && budgetCategories?.categories?.map((budget: Budget) => (
+          {/* FIX: Changed conditional rendering to use Array.isArray */}
+          {!loading && Array.isArray(budgetCategories?.categories) && budgetCategories.categories.length > 0 && budgetCategories.categories.map((budget: Budget) => (
             <BudgetCard key={budget._id} budget={budget} />
           ))}
         </div>
 
         {/* Budget Distribution Chart */}
-        {budgetCategories?.categories?.length > 0 && (
+        {/* FIX: Changed conditional rendering to use Array.isArray */}
+        {Array.isArray(budgetCategories?.categories) && budgetCategories.categories.length > 0 && (
           <Card className="mt-12 p-6 shadow-2xl rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <CardHeader className="px-0 pt-0 pb-4">
               <CardTitle className="text-2xl font-bold text-gray-800 dark:text-gray-100">Budget Distribution</CardTitle>
@@ -493,7 +495,7 @@ const MyBudget = () => {
                     <span className="mt-2 block text-lg text-gray-600 dark:text-gray-400">Loading budget details...</span>
                   </td>
                 </tr>
-              ) : budgetCategories?.categories?.length > 0 ? (
+              ) : (Array.isArray(budgetCategories?.categories) && budgetCategories.categories.length > 0) ? ( // FIX: Changed conditional rendering to use Array.isArray
                 budgetCategories.categories.map((budget: Budget) => (
                   <tr
                     key={budget._id}
