@@ -1,6 +1,6 @@
-# 💸 Purse – AI-Powered Personal Finance Assistant
+# 💸 Pennywise – AI-Powered Personal Finance Assistant
 
-Purse is a smart, AI-driven personal finance assistant built with **Next.js**, **TailwindCSS**, and **LangChain**. It helps users manage budgets, track expenses, and receive personalized financial recommendations based on uploaded data.
+Pennywise is a smart, AI-driven personal finance assistant built with **Next.js**, **TailwindCSS**, and **LangChain**. It helps users manage budgets, track expenses, and receive personalized financial recommendations based on uploaded data.
 
 ## 🚀 Features
 
