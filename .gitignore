@@ -1,37 +1,68 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# Dependencies
 node_modules/
 .pnp/
 .pnp.js
 .yarn/install-state.gz
 
-# testing
+# Testing
 coverage/
+test-results/
 
-# next.js
+# Next.js build output
 .next/
 out/
 
-# production
+# Production build
 build/
 
-# misc
+# Static export
+out/
+
+# Miscellaneous
 .DS_Store
 *.pem
+*.log
+*.zip
+*.tgz
+*.swp
 
-# debug
+# Local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# Vercel
+.vercel/
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE & Editor settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Firebase (if used)
+.firebase/
+
+# MacOS-specific
+.AppleDouble
+.LSOverride
+
+# Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env.local
-.env
-
-# vercel
-.vercel/
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Optional lockfiles (if you switch package managers often)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

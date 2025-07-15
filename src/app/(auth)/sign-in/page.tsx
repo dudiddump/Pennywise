@@ -66,12 +66,17 @@ function SignInForm() {
   return (
     <div className="font-[sans-serif] px-5 mb-10">
       <div className="py-2 flex flex-col mb-10">
-        <div className="flex items-center space-x-3 mt-2">
-          <div className="relative w-8 h-8">
-            <MdMoney size={30}/>
-          </div>
+        <div className="flex items-center space-x-3 py-2">
+          <Image
+            src="/pennywise-logo.png"
+            alt="Pennywise Logo"
+            width={40}
+            height={40}
+            className="rounded" // optional
+          />
           <h1 className="text-gray-600 text-xl dark:text-gray-300 font-semibold">Pennywise</h1>
         </div>
+
       </div>
       <div className="w-full max-w-4xl mx-auto">
         <div className="grid md:grid-cols-2 lg:gap-24 gap-16 w-full sm:p-8 p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded overflow-hidden">

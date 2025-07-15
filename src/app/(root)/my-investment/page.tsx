@@ -317,14 +317,11 @@ const MyInvestment = () => {
           Stock Market Trends Data with Real-Time Analysis and Detailed Overview
         </h1>
         <p className="bg-gray-700 p-5 rounded-xl">
-          This Feature route provides a comprehensive view of the latest stock
-          market trends, including top gainers, losers, and most active stocks.
-          By analyzing real-time data, it highlights key market movements and
-          offers a detailed overview of each stock, including essential
-          information like Symbol, AssetType, Name, Currency, Country, Sector,
-          Industry, Address, and Official Website. This feature empowers users
-          to make informed investment decisions based on up-to-date market
-          performance.
+          This feature delivers an in-depth snapshot of current stock market trends, 
+          showcasing top gainers, losers, and the most actively traded stocks. Leveraging real-time data, it highlights 
+          major market movements and provides detailed insights into each stock, including key details such as 
+          symbol, asset type, name, currency, country, sector, industry, address, and official website. 
+          It enables users to make well-informed investment decisions based on the latest market activity.
         </p>
       </div>
       <div className="flex m-10 flex-col bg-gray-700 rounded-xl">

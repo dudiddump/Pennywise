@@ -1,149 +1,120 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { FaPaperPlane, FaSmile, FaPaperclip } from "react-icons/fa";
-import Image from "next/image";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Sparkles, Bot, Loader2 } from "lucide-react";
 
-const ChatbotUI = () => {
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hi there! 👋 How can I assist you today?" },
-  ]);
-  const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+const prompts = [
+  "Track my monthly expenses",
+  "Set a budget for my food & transport",
+  "How to save more with my income",
+  "Smart ways to invest with little money",
+  "Why is my savings goal not progressing?",
+  "How much emergency fund do I need?"
+];
 
-  // Scroll to bottom when messages update
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+export default function FinanceAssistant() {
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState("");
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
-
-    const userMsg = { sender: "user", text: input };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput("");
-    setIsTyping(true);
+  const askBot = async (question: string) => {
+    setQuery(question);
+    setLoading(true);
+    setResponse("");
 
     try {
+      // Replace this with your actual backend call
       const res = await fetch("/api/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ question })
       });
 
       const data = await res.json();
-      const botMsg = { sender: "bot", text: data.reply || "No response." };
-      setMessages((prev) => [...prev, botMsg]);
-    } catch (err) {
-      console.error("Error fetching chatbot reply:", err);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "⚠️ Something went wrong!" },
-      ]);
+      setResponse(data.answer || "Sorry, I couldn't find an answer.");
+    } catch (error) {
+      setResponse("Something went wrong. Please try again.");
     } finally {
-      setIsTyping(false);
+      setLoading(false);
     }
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    askBot(query);
+  };
+
   return (
-    <div className="max-w-md mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-4 border border-gray-300 dark:border-gray-700">
-      {/* Header */}
-      <div className="flex items-center space-x-4 border-b pb-3">
-        <Image
-          src="/avatar-bot.png"
-          alt="Chatbot"
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-        <div>
-          <h3 className="text-md font-semibold text-gray-800 dark:text-white">
-            Chat with PennyBot
-          </h3>
-          <p className="text-xs text-green-500">We're online</p>
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-[#0F172A] text-white p-6 max-w-4xl mx-auto"
+    >
+      <div className="text-center mb-6">
+        <h1 className="text-3xl font-bold text-purple-400 flex justify-center items-center gap-2">
+          <Bot size={28} className="text-purple-400" />
+          Pennywise AI Assistant
+        </h1>
+        <p className="text-sm text-gray-400 mt-2">Ask anything about your finances</p>
       </div>
 
-      {/* Messages */}
-      <div className="mt-4 h-80 overflow-y-auto space-y-3 pr-2">
-        {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`flex ${
-              msg.sender === "user" ? "justify-end" : "justify-start"
-            }`}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        {prompts.map((item, i) => (
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            key={i}
+            className="bg-[#1E293B] hover:bg-purple-600 text-white p-4 rounded-md border border-slate-700 flex items-start gap-2"
+            onClick={() => askBot(item)}
           >
-            {msg.sender === "bot" && (
-              <Image
-                src="/avatar-bot.png"
-                alt="Bot"
-                width={30}
-                height={30}
-                className="rounded-full mr-2"
-              />
-            )}
-            {msg.sender === "user" && (
-              <Image
-                src="/avatar-user.png"
-                alt="You"
-                width={30}
-                height={30}
-                className="rounded-full ml-2"
-              />
-            )}
-            <div
-              className={`px-4 py-2 rounded-xl text-sm max-w-xs ${
-                msg.sender === "user"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-white"
-              }`}
-            >
-              {msg.text}
-            </div>
-          </div>
+            <Sparkles className="text-purple-300 mt-1" size={20} />
+            {item}
+          </motion.button>
         ))}
-
-        {isTyping && (
-          <div className="flex items-center text-sm text-gray-400">
-            <Image
-              src="/avatar-bot.png"
-              alt="Bot Typing"
-              width={30}
-              height={30}
-              className="rounded-full mr-2"
-            />
-            <span>PennyBot is typing...</span>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <div className="flex items-center mt-4 border-t pt-3 space-x-2">
-        <button className="text-gray-500 hover:text-blue-500">
-          <FaSmile />
-        </button>
-        <button className="text-gray-500 hover:text-blue-500">
-          <FaPaperclip />
-        </button>
+      <form onSubmit={handleSubmit} className="flex items-center gap-3 mb-4">
         <input
-          type="text"
-          placeholder="Enter your message..."
-          className="flex-1 bg-transparent outline-none px-3 py-2 text-sm dark:text-white"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSend()}
+          className="flex-1 p-3 rounded-md text-black outline-none"
+          placeholder="Enter your financial question..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <button
-          onClick={handleSend}
-          className="bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600"
+          type="submit"
+          className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded"
         >
-          <FaPaperPlane />
+          Ask
         </button>
-      </div>
-    </div>
-  );
-};
+      </form>
 
-export default ChatbotUI;
+      {loading && (
+        <div className="flex items-center gap-2 text-purple-300 mt-6 animate-pulse">
+          <Loader2 className="animate-spin" size={20} />
+          Thinking...
+        </div>
+      )}
+
+      {!loading && response && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mt-6 p-4 bg-[#1E293B] rounded border border-purple-500"
+        >
+          <h2 className="text-lg font-semibold text-purple-400 mb-2">
+            📌 Answer:
+          </h2>
+          <p className="text-white whitespace-pre-line">{response}</p>
+        </motion.div>
+      )}
+
+      <p className="text-xs text-center mt-10 text-gray-400">
+        Content is generated by AI and is for reference only.
+      </p>
+    </motion.div>
+  );
+}

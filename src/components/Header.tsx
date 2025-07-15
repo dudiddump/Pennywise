@@ -118,13 +118,13 @@ const Header = () => {
         {/* Left side: Logo and name */}
         <Link href="/" className="flex items-center space-x-3">
           <Image
-            src="/icons/logo.svg"
-            width={34}
-            height={34}
-            alt="Horizon logo"
-            className="h-8 w-8"
+            src="/pennywise-logo.png" // Make sure this file is in the /public folder
+            width={48}
+            height={48}
+            alt="Pennywise logo"
+            className="h-12 w-12"
           />
-          <h1 className="text-gray-600 dark:text-gray-200 text-xl font-semibold">
+          <h1 className="text-gray-600 dark:text-gray-200 text-xl font-bold">
            Pennywise
           </h1>
         </Link>
