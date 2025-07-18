@@ -2,200 +2,398 @@ ID,User Query,Category
 1,List my top 3 expense categories this month.,Expense Inquiry
 2,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
 3,Should I invest in stocks or fixed deposit?,Investment Advice
+4,Which category had the highest spending last quarter?,Expense Inquiry
+5,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+6,What's the best way to invest RM5000 safely?,Investment Advice
+7,List my top 3 expense categories this month.,Expense Inquiry
+8,Create a weekly meal budget under RM200.,Budget Creation
+9,Is cryptocurrency a good investment for beginners?,Investment Advice
+10,How much did I spend on groceries last month?,Expense Inquiry
+11,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+12,Can you recommend a robo-advisor for beginners?,Investment Advice
+13,What were my total expenses for June?,Expense Inquiry
+14,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+15,Is cryptocurrency a good investment for beginners?,Investment Advice
 16,Which category had the highest spending last quarter?,Expense Inquiry
 17,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-19,What's the best way to invest RM5000 safely?,Investment Advice
+18,What's a low-risk investment option for short-term?,Investment Advice
+19,What were my total expenses for June?,Expense Inquiry
+20,Help me plan a vacation with a RM1500 budget.,Budget Creation
+21,What's the best way to invest RM5000 safely?,Investment Advice
+22,List my top 3 expense categories this month.,Expense Inquiry
+23,Create a weekly meal budget under RM200.,Budget Creation
+24,Should I invest in stocks or fixed deposit?,Investment Advice
+25,List my top 3 expense categories this month.,Expense Inquiry
+26,Create a weekly meal budget under RM200.,Budget Creation
+27,What's the best way to invest RM5000 safely?,Investment Advice
+28,Did I exceed my entertainment budget this week?,Expense Inquiry
+29,Create a weekly meal budget under RM200.,Budget Creation
+30,What's the best way to invest RM5000 safely?,Investment Advice
 31,List my top 3 expense categories this month.,Expense Inquiry
-32,Create a weekly meal budget under RM200.,Budget Creation
-34,Is cryptocurrency a good investment for beginners?,Investment Advice
-46,How much did I spend on groceries last month?,Expense Inquiry
-47,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-49,Can you recommend a robo-advisor for beginners?,Investment Advice
-61,What were my total expenses for June?,Expense Inquiry
-62,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-64,Is cryptocurrency a good investment for beginners?,Investment Advice
-76,Which category had the highest spending last quarter?,Expense Inquiry
-77,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-79,What's a low-risk investment option for short-term?,Investment Advice
-91,What were my total expenses for June?,Expense Inquiry
-92,Help me plan a vacation with a RM1500 budget.,Budget Creation
-94,What's the best way to invest RM5000 safely?,Investment Advice
-101,List my top 3 expense categories this month.,Expense Inquiry
-102,Create a weekly meal budget under RM200.,Budget Creation
-104,Should I invest in stocks or fixed deposit?,Investment Advice
-116,List my top 3 expense categories this month.,Expense Inquiry
-117,Create a weekly meal budget under RM200.,Budget Creation
+32,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+33,Should I invest in stocks or fixed deposit?,Investment Advice
+34,Which category had the highest spending last quarter?,Expense Inquiry
+35,Create a weekly meal budget under RM200.,Budget Creation
+36,What's a low-risk investment option for short-term?,Investment Advice
+37,What were my total expenses for June?,Expense Inquiry
+38,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+39,Should I invest in stocks or fixed deposit?,Investment Advice
+40,What were my total expenses for June?,Expense Inquiry
+41,Create a weekly meal budget under RM200.,Budget Creation
+42,Should I invest in stocks or fixed deposit?,Investment Advice
+43,List my top 3 expense categories this month.,Expense Inquiry
+44,What's a low-risk investment option for short-term?,Investment Advice
+45,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+46,Did I exceed my entertainment budget this week?,Expense Inquiry
+47,Should I invest in stocks or fixed deposit?,Investment Advice
+48,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+49,Did I exceed my entertainment budget this week?,Expense Inquiry
+50,Should I invest in stocks or fixed deposit?,Investment Advice
+51,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+52,Did I exceed my entertainment budget this week?,Expense Inquiry
+53,What's a low-risk investment option for short-term?,Investment Advice
+54,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+55,What were my total expenses for June?,Expense Inquiry
+56,Can you recommend a robo-advisor for beginners?,Investment Advice
+57,Help me plan a vacation with a RM1500 budget.,Budget Creation
+58,Did I exceed my entertainment budget this week?,Expense Inquiry
+59,What's a low-risk investment option for short-term?,Investment Advice
+60,Build a budget for a student with RM1000 income.,Budget Creation
+61,Did I exceed my entertainment budget this week?,Expense Inquiry
+62,Is cryptocurrency a good investment for beginners?,Investment Advice
+63,Help me plan a vacation with a RM1500 budget.,Budget Creation
+64,Which category had the highest spending last quarter?,Expense Inquiry
+65,What's a low-risk investment option for short-term?,Investment Advice
+66,Build a budget for a student with RM1000 income.,Budget Creation
+67,Did I exceed my entertainment budget this week?,Expense Inquiry
+68,Can you recommend a robo-advisor for beginners?,Investment Advice
+69,Build a budget for a student with RM1000 income.,Budget Creation
+70,List my top 3 expense categories this month.,Expense Inquiry
+71,What's the best way to invest RM5000 safely?,Investment Advice
+72,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+73,What were my total expenses for June?,Expense Inquiry
+74,Can you recommend a robo-advisor for beginners?,Investment Advice
+75,Build a budget for a student with RM1000 income.,Budget Creation
+76,How much did I spend on groceries last month?,Expense Inquiry
+77,What's a low-risk investment option for short-term?,Investment Advice
+78,Build a budget for a student with RM1000 income.,Budget Creation
+79,List my top 3 expense categories this month.,Expense Inquiry
+80,Can you recommend a robo-advisor for beginners?,Investment Advice
+81,Create a weekly meal budget under RM200.,Budget Creation
+82,Did I exceed my entertainment budget this week?,Expense Inquiry
+83,Should I invest in stocks or fixed deposit?,Investment Advice
+84,Help me plan a vacation with a RM1500 budget.,Budget Creation
+85,Which category had the highest spending last quarter?,Expense Inquiry
+86,Can you recommend a robo-advisor for beginners?,Investment Advice
+87,Build a budget for a student with RM1000 income.,Budget Creation
+88,How much did I spend on groceries last month?,Expense Inquiry
+89,What's the best way to invest RM5000 safely?,Investment Advice
+90,Create a weekly meal budget under RM200.,Budget Creation
+91,List my top 3 expense categories this month.,Expense Inquiry
+92,What's a low-risk investment option for short-term?,Investment Advice
+93,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+94,Which category had the highest spending last quarter?,Expense Inquiry
+95,Can you recommend a robo-advisor for beginners?,Investment Advice
+96,Build a budget for a student with RM1000 income.,Budget Creation
+97,What were my total expenses for June?,Expense Inquiry
+98,What's a low-risk investment option for short-term?,Investment Advice
+99,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+100,Did I exceed my entertainment budget this week?,Expense Inquiry
+101,What's a low-risk investment option for short-term?,Investment Advice
+102,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+103,Did I exceed my entertainment budget this week?,Expense Inquiry
+104,What's a low-risk investment option for short-term?,Investment Advice
+105,Create a weekly meal budget under RM200.,Budget Creation
+106,Did I exceed my entertainment budget this week?,Expense Inquiry
+107,Is cryptocurrency a good investment for beginners?,Investment Advice
+108,Build a budget for a student with RM1000 income.,Budget Creation
+109,Which category had the highest spending last quarter?,Expense Inquiry
+110,Is cryptocurrency a good investment for beginners?,Investment Advice
+111,Help me plan a vacation with a RM1500 budget.,Budget Creation
+112,List my top 3 expense categories this month.,Expense Inquiry
+113,Is cryptocurrency a good investment for beginners?,Investment Advice
+114,Create a weekly meal budget under RM200.,Budget Creation
+115,What were my total expenses for June?,Expense Inquiry
+116,What's the best way to invest RM5000 safely?,Investment Advice
+117,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+118,List my top 3 expense categories this month.,Expense Inquiry
 119,What's the best way to invest RM5000 safely?,Investment Advice
-131,Did I exceed my entertainment budget this week?,Expense Inquiry
-132,Create a weekly meal budget under RM200.,Budget Creation
+120,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+121,Did I exceed my entertainment budget this week?,Expense Inquiry
+122,Is cryptocurrency a good investment for beginners?,Investment Advice
+123,Help me plan a vacation with a RM1500 budget.,Budget Creation
+124,List my top 3 expense categories this month.,Expense Inquiry
+125,What's a low-risk investment option for short-term?,Investment Advice
+126,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+127,How much did I spend on groceries last month?,Expense Inquiry
+128,Is cryptocurrency a good investment for beginners?,Investment Advice
+129,Help me plan a vacation with a RM1500 budget.,Budget Creation
+130,Which category had the highest spending last quarter?,Expense Inquiry
+131,Should I invest in stocks or fixed deposit?,Investment Advice
+132,Help me plan a vacation with a RM1500 budget.,Budget Creation
+133,Which category had the highest spending last quarter?,Expense Inquiry
 134,What's the best way to invest RM5000 safely?,Investment Advice
-146,List my top 3 expense categories this month.,Expense Inquiry
-147,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+135,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+136,What were my total expenses for June?,Expense Inquiry
+137,What's the best way to invest RM5000 safely?,Investment Advice
+138,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+139,List my top 3 expense categories this month.,Expense Inquiry
+140,What's the best way to invest RM5000 safely?,Investment Advice
+141,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+142,What were my total expenses for June?,Expense Inquiry
+143,Is cryptocurrency a good investment for beginners?,Investment Advice
+144,Build a budget for a student with RM1000 income.,Budget Creation
+145,Did I exceed my entertainment budget this week?,Expense Inquiry
+146,Can you recommend a robo-advisor for beginners?,Investment Advice
+147,Create a weekly meal budget under RM200.,Budget Creation
+148,Which category had the highest spending last quarter?,Expense Inquiry
 149,Should I invest in stocks or fixed deposit?,Investment Advice
-161,Which category had the highest spending last quarter?,Expense Inquiry
-162,Create a weekly meal budget under RM200.,Budget Creation
+150,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+151,Which category had the highest spending last quarter?,Expense Inquiry
+152,What's a low-risk investment option for short-term?,Investment Advice
+153,Help me plan a vacation with a RM1500 budget.,Budget Creation
+154,List my top 3 expense categories this month.,Expense Inquiry
+155,What's the best way to invest RM5000 safely?,Investment Advice
+156,Create a weekly meal budget under RM200.,Budget Creation
+157,List my top 3 expense categories this month.,Expense Inquiry
+158,Should I invest in stocks or fixed deposit?,Investment Advice
+159,Create a weekly meal budget under RM200.,Budget Creation
+160,What were my total expenses for June?,Expense Inquiry
+161,What's the best way to invest RM5000 safely?,Investment Advice
+162,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+163,List my top 3 expense categories this month.,Expense Inquiry
 164,What's a low-risk investment option for short-term?,Investment Advice
-176,What were my total expenses for June?,Expense Inquiry
+165,Can you help me create a budget for RM3000 monthly income?,Budget Creation
+166,How much did I spend on groceries last month?,Expense Inquiry
+167,Should I invest in stocks or fixed deposit?,Investment Advice
+168,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+169,List my top 3 expense categories this month.,Expense Inquiry
+170,What's the best way to invest RM5000 safely?,Investment Advice
+171,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+172,List my top 3 expense categories this month.,Expense Inquiry
+173,What's the best way to invest RM5000 safely?,Investment Advice
+174,Build a budget for a student with RM1000 income.,Budget Creation
+175,What were my total expenses for June?,Expense Inquiry
+176,Can you recommend a robo-advisor for beginners?,Investment Advice
 177,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-179,Should I invest in stocks or fixed deposit?,Investment Advice
-191,What were my total expenses for June?,Expense Inquiry
+178,Which category had the highest spending last quarter?,Expense Inquiry
+179,What's a low-risk investment option for short-term?,Investment Advice
+180,Build a budget for a student with RM1000 income.,Budget Creation
+181,List my top 3 expense categories this month.,Expense Inquiry
+182,What's a low-risk investment option for short-term?,Investment Advice
+183,Build a budget for a student with RM1000 income.,Budget Creation
+184,Did I exceed my entertainment budget this week?,Expense Inquiry
+185,What's the best way to invest RM5000 safely?,Investment Advice
+186,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
+187,Which category had the highest spending last quarter?,Expense Inquiry
+188,Should I invest in stocks or fixed deposit?,Investment Advice
+189,Help me plan a vacation with a RM1500 budget.,Budget Creation
+190,Which category had the highest spending last quarter?,Expense Inquiry
+191,Is cryptocurrency a good investment for beginners?,Investment Advice
 192,Create a weekly meal budget under RM200.,Budget Creation
-194,Should I invest in stocks or fixed deposit?,Investment Advice
-201,List my top 3 expense categories this month.,Expense Inquiry
-202,What's a low-risk investment option for short-term?,Investment Advice
-203,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-204,Did I exceed my entertainment budget this week?,Expense Inquiry
-205,Should I invest in stocks or fixed deposit?,Investment Advice
-206,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-207,Did I exceed my entertainment budget this week?,Expense Inquiry
-208,Should I invest in stocks or fixed deposit?,Investment Advice
-209,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-210,Did I exceed my entertainment budget this week?,Expense Inquiry
-211,What's a low-risk investment option for short-term?,Investment Advice
-212,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-213,What were my total expenses for June?,Expense Inquiry
-214,Can you recommend a robo-advisor for beginners?,Investment Advice
-215,Help me plan a vacation with a RM1500 budget.,Budget Creation
-216,Did I exceed my entertainment budget this week?,Expense Inquiry
-217,What's a low-risk investment option for short-term?,Investment Advice
-218,Build a budget for a student with RM1000 income.,Budget Creation
-219,Did I exceed my entertainment budget this week?,Expense Inquiry
-220,Is cryptocurrency a good investment for beginners?,Investment Advice
-221,Help me plan a vacation with a RM1500 budget.,Budget Creation
-222,Which category had the highest spending last quarter?,Expense Inquiry
-223,What's a low-risk investment option for short-term?,Investment Advice
-224,Build a budget for a student with RM1000 income.,Budget Creation
-225,Did I exceed my entertainment budget this week?,Expense Inquiry
-226,Can you recommend a robo-advisor for beginners?,Investment Advice
-227,Build a budget for a student with RM1000 income.,Budget Creation
-228,List my top 3 expense categories this month.,Expense Inquiry
-229,What's the best way to invest RM5000 safely?,Investment Advice
-230,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-231,What were my total expenses for June?,Expense Inquiry
-232,Can you recommend a robo-advisor for beginners?,Investment Advice
-233,Build a budget for a student with RM1000 income.,Budget Creation
-234,How much did I spend on groceries last month?,Expense Inquiry
-235,What's a low-risk investment option for short-term?,Investment Advice
-236,Build a budget for a student with RM1000 income.,Budget Creation
-237,List my top 3 expense categories this month.,Expense Inquiry
-238,Can you recommend a robo-advisor for beginners?,Investment Advice
-239,Create a weekly meal budget under RM200.,Budget Creation
-240,Did I exceed my entertainment budget this week?,Expense Inquiry
-241,Should I invest in stocks or fixed deposit?,Investment Advice
-242,Help me plan a vacation with a RM1500 budget.,Budget Creation
-243,Which category had the highest spending last quarter?,Expense Inquiry
-244,Can you recommend a robo-advisor for beginners?,Investment Advice
-245,Build a budget for a student with RM1000 income.,Budget Creation
-246,How much did I spend on groceries last month?,Expense Inquiry
-247,What's the best way to invest RM5000 safely?,Investment Advice
-248,Create a weekly meal budget under RM200.,Budget Creation
-249,List my top 3 expense categories this month.,Expense Inquiry
-250,What's a low-risk investment option for short-term?,Investment Advice
-251,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-252,Which category had the highest spending last quarter?,Expense Inquiry
-253,Can you recommend a robo-advisor for beginners?,Investment Advice
-254,Build a budget for a student with RM1000 income.,Budget Creation
-255,What were my total expenses for June?,Expense Inquiry
-256,What's a low-risk investment option for short-term?,Investment Advice
-257,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-258,Did I exceed my entertainment budget this week?,Expense Inquiry
-259,What's a low-risk investment option for short-term?,Investment Advice
-260,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-261,Did I exceed my entertainment budget this week?,Expense Inquiry
-262,What's a low-risk investment option for short-term?,Investment Advice
-263,Create a weekly meal budget under RM200.,Budget Creation
-264,Did I exceed my entertainment budget this week?,Expense Inquiry
-265,Is cryptocurrency a good investment for beginners?,Investment Advice
-266,Build a budget for a student with RM1000 income.,Budget Creation
-267,Which category had the highest spending last quarter?,Expense Inquiry
-268,Is cryptocurrency a good investment for beginners?,Investment Advice
-269,Help me plan a vacation with a RM1500 budget.,Budget Creation
-270,List my top 3 expense categories this month.,Expense Inquiry
-271,Is cryptocurrency a good investment for beginners?,Investment Advice
-272,Create a weekly meal budget under RM200.,Budget Creation
-273,What were my total expenses for June?,Expense Inquiry
-274,What's the best way to invest RM5000 safely?,Investment Advice
-275,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-276,List my top 3 expense categories this month.,Expense Inquiry
-277,What's the best way to invest RM5000 safely?,Investment Advice
-278,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-279,Did I exceed my entertainment budget this week?,Expense Inquiry
-280,Is cryptocurrency a good investment for beginners?,Investment Advice
-281,Help me plan a vacation with a RM1500 budget.,Budget Creation
-282,List my top 3 expense categories this month.,Expense Inquiry
-283,What's a low-risk investment option for short-term?,Investment Advice
-284,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-285,How much did I spend on groceries last month?,Expense Inquiry
-286,Is cryptocurrency a good investment for beginners?,Investment Advice
-287,Help me plan a vacation with a RM1500 budget.,Budget Creation
-288,Which category had the highest spending last quarter?,Expense Inquiry
-289,Should I invest in stocks or fixed deposit?,Investment Advice
-290,Help me plan a vacation with a RM1500 budget.,Budget Creation
-291,Which category had the highest spending last quarter?,Expense Inquiry
-292,What's the best way to invest RM5000 safely?,Investment Advice
-293,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-294,What were my total expenses for June?,Expense Inquiry
-295,What's the best way to invest RM5000 safely?,Investment Advice
-296,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-297,List my top 3 expense categories this month.,Expense Inquiry
-298,What's the best way to invest RM5000 safely?,Investment Advice
-299,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-300,What were my total expenses for June?,Expense Inquiry
-301,Is cryptocurrency a good investment for beginners?,Investment Advice
-302,Build a budget for a student with RM1000 income.,Budget Creation
-303,Did I exceed my entertainment budget this week?,Expense Inquiry
-304,Can you recommend a robo-advisor for beginners?,Investment Advice
-305,Create a weekly meal budget under RM200.,Budget Creation
-306,Which category had the highest spending last quarter?,Expense Inquiry
-307,Should I invest in stocks or fixed deposit?,Investment Advice
-308,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-309,Which category had the highest spending last quarter?,Expense Inquiry
-310,What's a low-risk investment option for short-term?,Investment Advice
-311,Help me plan a vacation with a RM1500 budget.,Budget Creation
-312,List my top 3 expense categories this month.,Expense Inquiry
-313,What's the best way to invest RM5000 safely?,Investment Advice
-314,Create a weekly meal budget under RM200.,Budget Creation
-315,List my top 3 expense categories this month.,Expense Inquiry
-316,Should I invest in stocks or fixed deposit?,Investment Advice
-317,Create a weekly meal budget under RM200.,Budget Creation
-318,What were my total expenses for June?,Expense Inquiry
-319,What's the best way to invest RM5000 safely?,Investment Advice
-320,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-321,List my top 3 expense categories this month.,Expense Inquiry
-322,What's a low-risk investment option for short-term?,Investment Advice
-323,Can you help me create a budget for RM3000 monthly income?,Budget Creation
-324,How much did I spend on groceries last month?,Expense Inquiry
-325,Should I invest in stocks or fixed deposit?,Investment Advice
-326,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-327,List my top 3 expense categories this month.,Expense Inquiry
-328,What's the best way to invest RM5000 safely?,Investment Advice
-329,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-330,List my top 3 expense categories this month.,Expense Inquiry
-331,What's the best way to invest RM5000 safely?,Investment Advice
-332,Build a budget for a student with RM1000 income.,Budget Creation
-333,What were my total expenses for June?,Expense Inquiry
-334,Can you recommend a robo-advisor for beginners?,Investment Advice
-335,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-336,Which category had the highest spending last quarter?,Expense Inquiry
-337,What's a low-risk investment option for short-term?,Investment Advice
-338,Build a budget for a student with RM1000 income.,Budget Creation
-339,List my top 3 expense categories this month.,Expense Inquiry
-340,What's a low-risk investment option for short-term?,Investment Advice
-341,Build a budget for a student with RM1000 income.,Budget Creation
-342,Did I exceed my entertainment budget this week?,Expense Inquiry
-343,What's the best way to invest RM5000 safely?,Investment Advice
-344,"Generate a monthly budget that includes rent, bills, and savings.",Budget Creation
-345,Which category had the highest spending last quarter?,Expense Inquiry
-346,Should I invest in stocks or fixed deposit?,Investment Advice
-347,Help me plan a vacation with a RM1500 budget.,Budget Creation
-348,Which category had the highest spending last quarter?,Expense Inquiry
-349,Is cryptocurrency a good investment for beginners?,Investment Advice
-350,Create a weekly meal budget under RM200.,Budget Creation
-351,Which category had the highest spending last quarter?,Expense Inquiry
-352,What's a low-risk investment option for short-term?,Investment Advice
-353,Create a weekly meal budget under RM200.,Budget Creation
-354,What were my total expenses for June?,Expense Inquiry
-355,Should I invest in stocks or fixed deposit?,Investment Advice
-356,Build a budget for a student with RM1000 income.,Budget Creation
-357,How much did I spend on groceries last month?,Expense Inquiry
-358,Can you recommend a robo-advisor for beginners?,Investment Advice
+193,Which category had the highest spending last quarter?,Expense Inquiry
+194,What's a low-risk investment option for short-term?,Investment Advice
+195,Create a weekly meal budget under RM200.,Budget Creation
+196,What were my total expenses for June?,Expense Inquiry
+197,Should I invest in stocks or fixed deposit?,Investment Advice
+198,Build a budget for a student with RM1000 income.,Budget Creation
+199,How much did I spend on groceries last month?,Expense Inquiry
+200,Can you recommend a robo-advisor for beginners?,Investment Advice
+201,What's my total spend this month?,Expense Inquiry
+202,Can you help me make a budget for groceries?,Budget Creation
+203,Should I put extra cash into crypto?,Investment Advice
+204,How much did I shell out on eating out last week?,Expense Inquiry
+205,"Need a plan to save for a vacation, like, next year.",Budget Creation
+206,What are some safe ways to invest a small amount?,Investment Advice
+207,"My utility bill was crazy high, what's my average?",Expense Inquiry
+208,Gotta figure out a budget for my new student loan payments.,Budget Creation
+209,Is a fixed deposit still a good idea these days?,Investment Advice
+210,"Break down my spending on entertainment, please.",Expense Inquiry
+211,How do I create a budget for a family of four?,Budget Creation
+212,"Thinking about stocks, where do I even start?",Investment Advice
+213,What were my biggest expenses last quarter?,Expense Inquiry
+214,Help me draft a monthly budget for RM2500 income.,Budget Creation
+215,Is buying gold a smart investment right now?,Investment Advice
+216,Did I go over budget on clothes this month?,Expense Inquiry
+217,I need a simple budget template for my first job.,Budget Creation
+218,What's the deal with unit trusts for beginners?,Investment Advice
+219,Show me my spending history for transport.,Expense Inquiry
+220,"Planning a wedding, how to budget for that?",Budget Creation
+221,"Any advice on investing for retirement, long term?",Investment Advice
+222,What's left in my food budget this week?,Expense Inquiry
+223,Can you suggest a budget for a single person living alone?,Budget Creation
+224,Is it too late to get into real estate investing?,Investment Advice
+225,How much did I spend on online subscriptions?,Expense Inquiry
+226,"I wanna save for a down payment, how much should I budget monthly?",Budget Creation
+227,What's considered a high-risk investment?,Investment Advice
+228,Tell me my total expenses for July.,Expense Inquiry
+229,Help me set up a budget for my side hustle income.,Budget Creation
+230,Are government bonds a safe bet for investment?,Investment Advice
+231,Where did all my money go last month?,Expense Inquiry
+232,"I need a weekly budget for RM300, is that doable?",Budget Creation
+233,What's the difference between stocks and mutual funds?,Investment Advice
+234,What's my average spending on coffee?,Expense Inquiry
+235,How to budget for unexpected expenses?,Budget Creation
+236,Is peer-to-peer lending a good investment?,Investment Advice
+237,Can you list my top 5 spending categories?,Expense Inquiry
+238,"I'm a student, how do I budget my allowance?",Budget Creation
+239,What are some ethical investment options?,Investment Advice
+240,Did I exceed my travel budget last trip?,Expense Inquiry
+241,Need a budget for my pet's expenses.,Budget Creation
+242,Should I invest in a Roth IRA or traditional IRA?,Investment Advice
+243,What's my total grocery bill for the past 3 months?,Expense Inquiry
+244,Help me create a zero-based budget.,Budget Creation
+245,How do I diversify my investment portfolio?,Investment Advice
+246,Show me my spending on dining out vs. home cooking.,Expense Inquiry
+247,Can you help me plan a budget for a new baby?,Budget Creation
+248,What's the best investment for a 5-year goal?,Investment Advice
+249,How much did I spend on gifts last year?,Expense Inquiry
+250,"I want to budget for a new car, what's realistic?",Budget Creation
+251,Is it better to invest small amounts regularly or large amounts rarely?,Investment Advice
+252,What's my average monthly electricity cost?,Expense Inquiry
+253,Can you help me build a budget for my freelance income?,Budget Creation
+254,What are some common investment mistakes to avoid?,Investment Advice
+255,Break down my spending by category for Q2.,Expense Inquiry
+256,I need a budget to pay off credit card debt.,Budget Creation
+257,Should I invest in individual stocks or ETFs?,Investment Advice
+258,What was my biggest single expense this month?,Expense Inquiry
+259,How do I create a budget that includes savings goals?,Budget Creation
+260,What's the best way to invest for passive income?,Investment Advice
+261,Show me my spending on hobbies.,Expense Inquiry
+262,Can you help me set up a budget for my upcoming move?,Budget Creation
+263,Is real estate investment trust (REIT) a good option?,Investment Advice
+264,What's my total transportation cost for the year?,Expense Inquiry
+265,Need a budget for a small business startup.,Budget Creation
+266,How do I choose a good financial advisor?,Investment Advice
+267,Did I overspend on gadgets last month?,Expense Inquiry
+268,"Help me budget for my wedding, roughly.",Budget Creation
+269,What's the difference between growth and value investing?,Investment Advice
+270,How much do I spend on subscriptions annually?,Expense Inquiry
+271,I want to budget for a down payment on a house.,Budget Creation
+272,Should I invest in emerging markets?,Investment Advice
+273,What's my average spending on health and wellness?,Expense Inquiry
+274,Can you help me make a budget for my retirement years?,Budget Creation
+275,What are some tax-efficient investment strategies?,Investment Advice
+276,Show me my spending on education this year.,Expense Inquiry
+277,Need a budget for a home renovation project.,Budget Creation
+278,Is now a good time to invest in tech stocks?,Investment Advice
+279,What's my total spend on pet supplies?,Expense Inquiry
+280,How do I budget for a child's education fund?,Budget Creation
+281,What's the role of bonds in a diversified portfolio?,Investment Advice
+282,Did I spend more on groceries or dining out last month?,Expense Inquiry
+283,Help me create a budget for a gap year abroad.,Budget Creation
+284,Should I invest in a target-date fund?,Investment Advice
+285,What are my recurring monthly expenses?,Expense Inquiry
+286,I need a budget for my side project expenses.,Budget Creation
+287,What's dollar-cost averaging and should I do it?,Investment Advice
+288,How much did I spend on gifts for holidays?,Expense Inquiry
+289,Can you help me budget for a new appliance purchase?,Budget Creation
+290,Is it wise to invest in a single company's stock?,Investment Advice
+291,What's my average monthly income vs. expenses?,Expense Inquiry
+292,Need a budget for my gym membership and fitness classes.,Budget Creation
+293,What are some common investment scams?,Investment Advice
+294,Show me my spending on books and media.,Expense Inquiry
+295,How to budget for a big purchase without going into debt?,Budget Creation
+296,What's the difference between active and passive investing?,Investment Advice
+297,What's my total spend on home maintenance?,Expense Inquiry
+298,Can you help me budget for a charitable donation goal?,Budget Creation
+299,Is investing in startups too risky?,Investment Advice
+300,How much did I spend on personal care products?,Expense Inquiry
+301,Need a budget for my car repairs.,Budget Creation
+302,What's the concept of compound interest in investing?,Investment Advice
+303,What's my average monthly internet bill?,Expense Inquiry
+304,How do I budget for a personal development course?,Budget Creation
+305,Should I invest in a high-yield savings account?,Investment Advice
+306,Show me my spending on coffee shops vs. making coffee at home.,Expense Inquiry
+307,Can you help me budget for a new hobby?,Budget Creation
+308,What are some long-term investment trends?,Investment Advice
+309,How much did I spend on subscriptions last year?,Expense Inquiry
+310,Need a budget for my upcoming medical expenses.,Budget Creation
+311,Is gold a good hedge against inflation?,Investment Advice
+312,What's my total spend on travel this year?,Expense Inquiry
+313,How to budget for a pet's vet bills?,Budget Creation
+314,What's the best way to invest in renewable energy?,Investment Advice
+315,Did I go over budget on my entertainment allowance?,Expense Inquiry
+316,Can you help me create a budget for my emergency fund?,Budget Creation
+317,Should I invest in dividend stocks?,Investment Advice
+318,What are my top 3 biggest expenses this month?,Expense Inquiry
+319,"I need a budget for my new apartment, rent and utilities.",Budget Creation
+320,What's the risk of investing in foreign markets?,Investment Advice
+321,How much did I spend on public transport?,Expense Inquiry
+322,Can you help me budget for a child's extracurricular activities?,Budget Creation
+323,Is it better to invest in growth stocks or value stocks right now?,Investment Advice
+324,What's my average monthly spending on clothes?,Expense Inquiry
+325,"Need a budget for my upcoming vacation, flights and hotels.",Budget Creation
+326,What's the concept of market capitalization?,Investment Advice
+327,Show me my spending on dining out vs. groceries.,Expense Inquiry
+328,How do I budget for a home down payment?,Budget Creation
+329,Should I invest in a diversified portfolio?,Investment Advice
+330,What's my total spend on electronics?,Expense Inquiry
+331,Can you help me budget for a new car loan?,Budget Creation
+332,What are some common misconceptions about investing?,Investment Advice
+333,"I need a weekly budget for RM30000, is that doable?",Budget Creation
+334,How much did I spend on books last month?,Expense Inquiry
+335,Need a budget for my health insurance premiums.,Budget Creation
+336,Is it safe to invest in penny stocks?,Investment Advice
+337,What's my average monthly spending on gifts?,Expense Inquiry
+338,Can you help me budget for a new business venture?,Budget Creation
+339,What's the difference between a bull and bear market?,Investment Advice
+340,Show me my spending on streaming services.,Expense Inquiry
+341,How do I budget for a home improvement project?,Budget Creation
+342,Should I invest in a mutual fund or an ETF?,Investment Advice
+343,What's my total spend on personal care?,Expense Inquiry
+344,Need a budget for my student loan payments.,Budget Creation
+345,What's the best way to invest in emerging technologies?,Investment Advice
+346,How much did I spend on my car last year?,Expense Inquiry
+347,Can you help me budget for a new pet?,Budget Creation
+348,Is it a good time to invest in the stock market?,Investment Advice
+349,What's my average monthly spending on hobbies?,Expense Inquiry
+350,Need a budget for my wedding expenses.,Budget Creation
+351,What are some strategies for long-term wealth building?,Investment Advice
+352,Show me my spending on travel vs. staycations.,Expense Inquiry
+353,How do I budget for a child's college fund?,Budget Creation
+354,Should I invest in a low-risk bond fund?,Investment Advice
+355,How do I budget for a child's birthday party?,Budget Creation
+356,Show me my spending on dining out vs. cooking.,Expense Inquiry
+357,What's the concept of a bond yield?,Investment Advice
+358,"Can you help me budget for a new car, lease vs. buy?",Budget Creation
+359,What's my average monthly spending on personal care?,Expense Inquiry
+360,Is it safe to invest in cryptocurrency for short-term gains?,Investment Advice
+361,"Need a budget for my new freelance business, initial costs.",Budget Creation
+362,How much did I spend on streaming services last month?,Expense Inquiry
+363,What are some common investment strategies?,Investment Advice
+364,"Can you help me budget for my upcoming vacation, road trip?",Budget Creation
+365,What's my total spend on internet and TV this month?,Expense Inquiry
+366,Should I invest in a balanced fund for retirement?,Investment Advice
+367,"How do I budget for a new pet, ongoing costs?",Budget Creation
+368,Did I overspend on coffee last month?,Expense Inquiry
+369,Show me my spending on coffee vs. tea.,Expense Inquiry
+370,What's the difference between a stock market crash and correction?,Investment Advice
+371,Can you help me budget for a new home office setup?,Budget Creation
+372,What's my average monthly spending on gifts for family?,Expense Inquiry
+373,Is it better to invest in a mutual fund or a robo-advisor?,Investment Advice
+374,"Need a budget for my emergency fund, quick build.",Budget Creation
+375,How much did I spend on my phone bill last month?,Expense Inquiry
+376,What are some strategies for long-term financial planning?,Investment Advice
+377,"Can you help me budget for a new skill, like coding?",Budget Creation
+378,What's my total spend on hobbies this year?,Expense Inquiry
+379,Should I invest in a growth stock or a dividend stock?,Investment Advice
+380,How do I budget for a child's first savings account?,Expense Inquiry
+381,Show me my spending on travel vs. local activities.,Expense Inquiry
+382,What's the concept of a dividend in stocks?,Investment Advice
+383,"Can you help me budget for a new car, used car budget?",Budget Creation
+384,What's my average monthly spending on education?,Expense Inquiry
+385,Is it safe to invest in emerging markets as a beginner?,Investment Advice
+386,"Need a budget for my new business, marketing expenses.",Budget Creation
+387,How much did I spend on utilities last month?,Expense Inquiry
+388,What are some common pitfalls for new investors?,Investment Advice
+389,"Can you help me budget for my upcoming wedding, small budget?",Budget Creation
+390,What's my total spend on personal care this month?,Expense Inquiry
+391,Should I invest in a low-cost index fund?,Investment Advice
+392,"How do I budget for a large, one-time expense?",Budget Creation
+393,Show me my spending on dining out vs. cooking at home.,Expense Inquiry
+394,I got $500 to start invest,Investment Advice
+395,Can you help me budget for a new pet's initial costs?,Budget Creation
+396,How to budget for a big purchase if I have a debt?,Budget Creation
+397,Need a budget for my new side income.,Budget Creation
+398,Need to know about starting invest,Investment Advice
