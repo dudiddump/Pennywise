@@ -1,9 +1,9 @@
 
 
-export interface ApiResponse {
+export interface ApiResponse<T = any> {
     success: boolean;
     message: string;
-    data?: object; // Optional object
+    data?: T;
     datas?: object[]; // Optional array of objects
     
 }
