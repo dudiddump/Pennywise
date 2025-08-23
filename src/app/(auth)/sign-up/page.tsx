@@ -7,7 +7,7 @@ import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { signUpSchema } from "@/schemas/signUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { Loader2, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,6 +29,7 @@ const GoogleIcon = () => (
 
 function SignUpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -65,114 +66,132 @@ function SignUpForm() {
 
   const handleGoogleSignIn = async () => {
     await signIn("google", {
-      callbackUrl: "/home",
+      callbackUrl: "/dashboard",
       redirect: true,
     });
   };
 
   return (
     <div className="relative min-h-screen w-full bg-[#091C2D] text-white flex flex-col font-poppins overflow-hidden">
-      {/* Background radial gradients for highlight effects */}
       <div className="absolute top-[-25%] left-[-25%] w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_rgba(22,163,74,0.2)_0%,_transparent_60%)] -z-0"></div>
       <div className="absolute bottom-[-25%] right-[-25%] w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.15)_0%,_transparent_60%)] -z-0"></div>
 
-      {/* Header with Back button */}
-      <header className="absolute top-0 left-0 p-6 z-20">
-        <Button variant="ghost" onClick={() => router.back()} className="hover:bg-white/10 text-white p-2 flex items-center">
-            <ArrowLeft className="w-5 h-5 mr-1" />
-            Back
-        </Button>
-      </header>
+      <div className="relative z-10 flex flex-col flex-grow w-full max-w-sm mx-auto px-6">
+        {/* Header with Back button */}
+        <header className="flex-shrink-0 py-6 w-full">
+          <Button variant="ghost" onClick={() => router.back()} className="hover:bg-white/10 text-white p-2 flex items-center -ml-2">
+              <ArrowLeft className="w-5 h-5 mr-1" />
+              Back
+          </Button>
+        </header>
 
-      <main className="relative z-10 flex-grow flex flex-col justify-center items-center w-full max-w-sm mx-auto px-6">
-        {/* Title Section */}
-        <div className="w-full text-center mb-8">
-            <h1 className="text-4xl font-bold">Create Account</h1>
-            <p className="text-gray-400 mt-2">Join us and start managing your finances.</p>
-        </div>
+        {/* Main content, centered vertically */}
+        <main className="flex-grow flex flex-col justify-center w-full">
+          <div className="w-full text-center mb-8">
+              <h1 className="text-4xl font-bold">Create Account</h1>
+              <p className="text-gray-400 mt-2">Join us and start managing your finances.</p>
+          </div>
 
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
-                <FormField
-                    control={form.control}
-                    name="fullName"
-                    render={({ field }) => (
-                        <FormItem>
-                            <Label className="text-gray-300">Full Name</Label>
-                            <Input {...field} placeholder="Enter your full name" className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base" />
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="username"
-                    render={({ field }) => (
-                        <FormItem>
-                            <Label className="text-gray-300">Username</Label>
-                            <Input {...field} placeholder="Choose a username" className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base" />
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <Label className="text-gray-300">Email</Label>
-                            <Input {...field} type="email" placeholder="Enter your email" className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base" />
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <Label className="text-gray-300">Password</Label>
-                            <Input {...field} type="password" placeholder="Create a password" className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base" />
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+          <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
+                  <FormField
+                      control={form.control}
+                      name="fullName"
+                      render={({ field }) => (
+                          <FormItem>
+                              <Label className="text-gray-300">Full Name</Label>
+                              <Input {...field} placeholder="Enter your full name" className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base" />
+                              <FormMessage />
+                          </FormItem>
+                      )}
+                  />
+                  <FormField
+                      control={form.control}
+                      name="username"
+                      render={({ field }) => (
+                          <FormItem>
+                              <Label className="text-gray-300">Username</Label>
+                              <Input {...field} placeholder="Choose a username" className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base" />
+                              <FormMessage />
+                          </FormItem>
+                      )}
+                  />
+                  <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                          <FormItem>
+                              <Label className="text-gray-300">Email</Label>
+                              <Input {...field} type="email" placeholder="Enter your email" className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base" />
+                              <FormMessage />
+                          </FormItem>
+                      )}
+                  />
+                  <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                          <FormItem>
+                              <Label className="text-gray-300">Password</Label>
+                              <div className="relative">
+                                  <Input 
+                                      {...field} 
+                                      type={showPassword ? "text" : "password"}
+                                      placeholder="Create a password" 
+                                      className="bg-white/5 border-gray-600 focus:border-[#34D399] h-12 rounded-lg text-base pr-10" 
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-white"
+                                  >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                  </button>
+                              </div>
+                              <FormMessage />
+                          </FormItem>
+                      )}
+                  />
 
-                <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-[#34D399] text-[#0D1117] font-bold py-3 h-12 text-base rounded-lg hover:bg-[#2cb985] transition-all duration-300 transform hover:scale-105 mt-2"
-                >
-                    {isSubmitting ? <Loader2 className="animate-spin" /> : "Sign Up"}
-                </Button>
-            </form>
-        </Form>
+                  <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-[#34D399] text-[#0D1117] font-bold py-3 h-12 text-base rounded-lg hover:bg-[#2cb985] transition-all duration-300 transform hover:scale-105 mt-2"
+                  >
+                      {isSubmitting ? <Loader2 className="animate-spin" /> : "Sign Up"}
+                  </Button>
+              </form>
+          </Form>
 
-        <div className="relative my-6 w-full">
-            <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-gray-600" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-[#091C2D] px-2 text-gray-400">Or continue with</span>
-            </div>
-        </div>
+          <div className="relative my-6 w-full">
+              <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-gray-600" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-[#091C2D] px-2 text-gray-400">Or continue with</span>
+              </div>
+          </div>
 
-        <Button
-            variant="outline"
-            onClick={handleGoogleSignIn}
-            className="w-full border-2 border-[#34D399] text-white font-bold py-3 h-12 text-base rounded-lg hover:bg-[#34D399] hover:text-[#0D1117] transition-all duration-300 transform hover:scale-105"
-        >
-            <GoogleIcon />
-            Continue with Google
-        </Button>
-
-        <p className="text-sm mt-8 text-center text-gray-400">
-            Already have an account?{' '}
-            <Link href="/sign-in" className="text-[#34D399] font-semibold hover:underline">
-                Login Here
-            </Link>
-        </p>
-      </main>
+          <Button
+              variant="outline"
+              onClick={handleGoogleSignIn}
+              className="w-full border-2 border-[#34D399] text-white font-bold py-3 h-12 text-base rounded-lg hover:bg-[#34D399] hover:text-[#0D1117] transition-all duration-300 transform hover:scale-105"
+          >
+              <GoogleIcon />
+              Continue with Google
+          </Button>
+        </main>
+        
+        {/* Footer, pushed down by flex-grow */}
+        <footer className="flex-shrink-0 w-full py-8">
+            <p className="text-sm text-center text-gray-400">
+                Already have an account?{' '}
+                <Link href="/sign-in" className="text-[#34D399] font-semibold hover:underline">
+                    Login Here
+                </Link>
+            </p>
+        </footer>
+      </div>
     </div>
   );
 }

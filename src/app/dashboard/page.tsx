@@ -17,7 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Sidebar from "@/components/Sidebar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
@@ -36,11 +35,15 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
+// Assuming these are your chart components
+// import CustomLineChart from "@/components/chart/CustomLineChart";
+// import LatestExpenseTable from "@/components/LatestExpenseTable";
 
+// --- Type Definitions for API Data ---
 interface DashboardData {
   totalExpenses: number;
   totalItems: number;
-  savings: number;
+  savings: number; // Assuming this is total income
 }
 
 interface SavingGoalData {
@@ -59,6 +62,7 @@ interface BudgetData {
   categories: Category[];
 }
 
+// Helper component for stat cards with the new dark theme
 const StatCard = ({ title, amount, description }: { title: string, amount: number, description: string }) => (
     <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-lg">
         <CardHeader>
@@ -96,7 +100,6 @@ const Dashboard = () => {
       console.error("Error fetching dashboard data:", error);
     }
   }, []);
-
 
   const fetchSavingGoal = useCallback(async () => {
     try {
@@ -190,49 +193,47 @@ const Dashboard = () => {
       : 0;
 
   return (
-    <div className="bg-[#091C2D] text-white min-h-screen font-poppins">
-      <Sidebar />
-      <div className="p-4 sm:p-6 lg:p-8">
-        <div className="max-w-7xl mx-auto">
-          <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-              <div>
-                  <h1 className="text-3xl font-bold">
-                      Hello, {user?.username || "Guest"} 👋
-                  </h1>
-                  <p className="text-gray-400 mt-1">Welcome back and see your progress!</p>
-              </div>
-              {/* <Button className="bg-[#34D399] hover:bg-[#2cb985] text-[#0D1117] font-bold py-3 px-6 rounded-lg mt-4 sm:mt-0 flex items-center gap-2 transition-transform duration-200 hover:scale-105">
-                  <FaPlus />
-                  Add Transaction
-              </Button> */}
-          </header>
+    <div className="bg-[#091C2D] text-white min-h-screen p-4 sm:p-6 lg:p-8 font-poppins">
+      <div className="max-w-7xl mx-auto">
+        <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+            <div>
+                <h1 className="text-3xl font-bold">
+                    Hello, {user?.username || "Guest"} 👋
+                </h1>
+                <p className="text-gray-400 mt-1">Welcome back and see your progress!</p>
+            </div>
+            <Button className="bg-[#34D399] hover:bg-[#2cb985] text-[#0D1117] font-bold py-3 px-6 rounded-lg mt-4 sm:mt-0 flex items-center gap-2 transition-transform duration-200 hover:scale-105">
+                <FaPlus />
+                Add Transaction
+            </Button>
+        </header>
 
-          <main className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <StatCard title="Total Income" amount={dashboardData?.savings || 0} description="All time income" />
-                      <StatCard title="Total Expense" amount={dashboardData?.totalExpenses || 0} description="All time expense" />
-                      <StatCard title="Balance" amount={(dashboardData?.savings || 0) - (dashboardData?.totalExpenses || 0)} description="Current balance" />
-                  </div>
-                  
-                  {/* Placeholder for Transaction Chart and Table */}
-                  <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-lg h-96 flex items-center justify-center">
-                      <CardContent className="text-center">
-                          <CardTitle>Transaction Chart</CardTitle>
-                          <CardDescription className="text-gray-400">Chart component will be here.</CardDescription>
-                          {/* <CustomLineChart range={range} /> */}
-                      </CardContent>
-                  </Card>
-                  <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-lg h-96 flex items-center justify-center">
-                      <CardContent className="text-center">
-                          <CardTitle>Latest Expenses</CardTitle>
-                          <CardDescription className="text-gray-400">Table component will be here.</CardDescription>
-                          {/* <LatestExpenseTable /> */}
-                      </CardContent>
-                  </Card>
-              </div>
+        <main className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <StatCard title="Total Income" amount={dashboardData?.savings || 0} description="All time income" />
+                    <StatCard title="Total Expense" amount={dashboardData?.totalExpenses || 0} description="All time expense" />
+                    <StatCard title="Balance" amount={(dashboardData?.savings || 0) - (dashboardData?.totalExpenses || 0)} description="Current balance" />
+                </div>
+                
+                {/* Placeholder for Transaction Chart and Table */}
+                <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-lg h-96 flex items-center justify-center">
+                    <CardContent className="text-center">
+                        <CardTitle>Transaction Chart</CardTitle>
+                        <CardDescription className="text-gray-400">Chart component will be here.</CardDescription>
+                        {/* <CustomLineChart range={range} /> */}
+                    </CardContent>
+                </Card>
+                <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-lg h-96 flex items-center justify-center">
+                    <CardContent className="text-center">
+                        <CardTitle>Latest Expenses</CardTitle>
+                        <CardDescription className="text-gray-400">Table component will be here.</CardDescription>
+                        {/* <LatestExpenseTable /> */}
+                    </CardContent>
+                </Card>
+            </div>
 
-              <div className="lg:col-span-1 space-y-6">
+            <div className="lg:col-span-1 space-y-6">
                 <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-lg">
                     <CardHeader>
                         <div className="flex justify-between items-center">
@@ -315,8 +316,7 @@ const Dashboard = () => {
                 </Card>
             </div>
         </main>
-        </div>
-        </div>
+      </div>
     </div>
   );
 };

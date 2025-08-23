@@ -1,14 +1,12 @@
 "use client";
 
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
-
 import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useForm } from "react-hook-form";
@@ -18,103 +16,139 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ApiResponse } from "@/types/ApiResponse";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import { MdMoney } from "react-icons/md";
+import { ArrowLeft, Loader2, Lock } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import Image from "next/image";
 
 const VerifyAccount = () => {
-  const router = useRouter();
-  const params = useParams<{ username: string }>();
-  const { toast } = useToast();
+  const router = useRouter();
+  const params = useParams<{ username: string }>();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof verifySchema>>({
-    resolver: zodResolver(verifySchema),
-    mode: "onChange",
-  });
-
-  const [otpValue, setOtpValue] = useState("");
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const handleOtpChange = (value: string) => {
-    setOtpValue(value);
-    form.setValue("code", value);
-  };
-
-  const onSubmit = async (data: z.infer<typeof verifySchema>) => {
-    setLoading(true)
-    try {
-      const response = await axios.post<ApiResponse>(`/api/verify-code`, {
-        username: params.username,
-        code: data.code,
-      });
-
-      toast({
-        title: "Success",
-        description: response.data.message,
-      });
-
-      router.replace("/sign-in");
-    } catch (error) {
-      const axiosError = error as AxiosError<ApiResponse>;
-      toast({
-        title: "Verification Failed",
-        description:
-          axiosError.response?.data.message ??
-          "An error occurred. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
+  const form = useForm<z.infer<typeof verifySchema>>({
+    resolver: zodResolver(verifySchema),
+    defaultValues: {
+        code: "",
     }
-  };
+  });
 
-  return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
-      <div className="flex items-center space-x-3 py-10">
-        <MdMoney size={30} className="dark:text-gray-200" />
-        <h1 className="text-gray-600 dark:text-gray-200 text-xl font-semibold">Pennywise</h1>
-      </div>
-      <div className="w-full max-w-md p-8 space-y-8 rounded-lg border-2 border-gray-600 shadow-lg">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 dark:text-gray-100">
-            Verify Your Account
-          </h1>
-          <p className="mb-4 dark:text-gray-300">Enter the verification code sent to your email</p>
+  const onSubmit = async (data: z.infer<typeof verifySchema>) => {
+    setLoading(true);
+    try {
+      const response = await axios.post<ApiResponse>(`/api/verify-code`, {
+        username: params.username,
+        code: data.code,
+      });
+
+      toast({
+        title: "Success",
+        description: response.data.message,
+      });
+
+      router.replace("/sign-in");
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast({
+        title: "Verification Failed",
+        description:
+          axiosError.response?.data.message ??
+          "An error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const handleResend = async () => {
+    // Implement resend logic here
+    toast({
+        title: "OTP Resent",
+        description: "A new OTP has been sent to your email.",
+    });
+  }
+
+  return (
+    <div className="relative min-h-screen w-full bg-[#091C2D] text-white flex flex-col font-poppins overflow-hidden">
+      {/* Background radial gradient effects */}
+      <div className="absolute top-[-25%] left-[-25%] w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_rgba(22,163,74,0.2)_0%,_transparent_60%)] -z-0"></div>
+      <div className="absolute bottom-[-25%] right-[-25%] w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.15)_0%,_transparent_60%)] -z-0"></div>
+
+      {/* Header with Back button */}
+      <header className="absolute top-0 left-0 p-6 z-20">
+        <Button variant="ghost" onClick={() => router.back()} className="hover:bg-white/10 text-white p-2 flex items-center">
+            <ArrowLeft className="w-5 h-5 mr-1" />
+            Back
+        </Button>
+      </header>
+
+      <main className="relative z-10 flex-grow flex flex-col justify-center items-center w-full px-6">
+        <div className="w-full max-w-md flex flex-col items-center">
+            <div className="mb-6">
+                <Lock className="w-20 h-20 text-[#34D399]" />
+            </div>
+            <div className="w-full text-center mb-8">
+                <h1 className="text-4xl font-bold">OTP Verification</h1>
+                <p className="text-gray-400 mt-2">Enter the OTP sent to your email</p>
+            </div>
+
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+                    <FormField
+                        control={form.control}
+                        name="code"
+                        render={({ field }) => (
+                            <FormItem className="flex flex-col items-center">
+                                <FormLabel className="sr-only">Verification Code</FormLabel>
+                                <FormControl>
+                                    <InputOTP 
+                                        maxLength={7} 
+                                        {...field}
+                                        pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                                    >
+                                        <InputOTPGroup className="gap-2">
+                                            <InputOTPSlot index={0} className="bg-white/5 border-gray-600 h-12 w-12 text-xl rounded-lg" />
+                                            <InputOTPSlot index={1} className="bg-white/5 border-gray-600 h-12 w-12 text-xl rounded-lg" />
+                                            <InputOTPSlot index={2} className="bg-white/5 border-gray-600 h-12 w-12 text-xl rounded-lg" />
+                                            <InputOTPSlot index={3} className="bg-white/5 border-gray-600 h-12 w-12 text-xl rounded-lg" />
+                                            <InputOTPSlot index={4} className="bg-white/5 border-gray-600 h-12 w-12 text-xl rounded-lg" />
+                                            <InputOTPSlot index={5} className="bg-white/5 border-gray-600 h-12 w-12 text-xl rounded-lg" />
+                                            <InputOTPSlot index={6} className="bg-white/5 border-gray-600 h-12 w-12 text-xl rounded-lg" />
+                                        </InputOTPGroup>
+                                    </InputOTP>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <div className="text-center text-sm text-gray-400">
+                        Didn&apos;t receive OTP?{' '}
+                        <Button variant="link" onClick={handleResend} className="text-[#34D399] p-0 h-auto">
+                            RESEND
+                        </Button>
+                    </div>
+                    <Button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full bg-[#34D399] text-[#0D1117] font-bold py-3 h-12 text-base rounded-lg hover:bg-[#2cb985] transition-all duration-300 transform hover:scale-105"
+                    >
+                        {loading ? <Loader2 className="animate-spin" /> : "Verify & Continue"}
+                    </Button>
+                </form>
+            </Form>
         </div>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div>
-            <label htmlFor="code" className="block font-semibold text-lg py-2 dark:text-gray-200">
-              Verification Code
-            </label>
-            <InputOTP
-              maxLength={7}
-              pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-              value={otpValue}
-              onChange={handleOtpChange}
-            >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-                <InputOTPSlot index={6} />
-              </InputOTPGroup>
-            </InputOTP>
-            {form.formState.errors.code && (
-              <p className="text-red-600 dark:text-red-400">
-                {form.formState.errors.code.message}
-              </p>
-            )}
-          </div>
-          <div className="text-right">
-            <Button type="submit" disabled={loading} variant="outline" className="w-24 dark:text-gray-200">
-              {loading ? "verifying..." : "Verify"}
-            </Button>
-          </div>
-        </form>
-      </div>
+      </main>
+      <footer className="relative z-10 w-full flex-shrink-0 pb-8 flex justify-center">
+        <Image 
+          src="/pennywise-logo.png"
+          alt="Pennywise Logo"
+          width={40}
+          height={40}
+        />
+      </footer>
     </div>
-  );
+  );
 };
 
 export default VerifyAccount;

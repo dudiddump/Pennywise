@@ -4,8 +4,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
-
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -14,16 +12,14 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    // If there’s no session, redirect to the sign-in page
-    redirect("/sign-in");
+    redirect("/LandingPage");
   }
 
   return (
-
     <div className="flex flex-col h-screen">
       {/* Header */}
       <Header />
-
+      
       <div className="flex flex-grow  lg:items-start">
         {/* Main content area */}
         <Sidebar />

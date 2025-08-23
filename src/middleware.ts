@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
 
-  const isPublicRoute = ["/sign-in", "/sign-up", "/home"].includes(path);
+  const isPublicRoute = ["/", "/sign-in", "/sign-up", "/home"].includes(path);
   const isVerifyRoute = path.startsWith("/verify/");
 
   if (isVerifyRoute) {
@@ -18,14 +18,18 @@ export async function middleware(request: NextRequest) {
   }
 
   if (path === "/" && !token) {
-    return NextResponse.redirect(new URL("/home", request.url));
+    return NextResponse.next();
   }
 
-  if (isPublicRoute && token) {
-    return NextResponse.redirect(new URL("/home", request.url)); // ✅ changed from `/`
+  if ((path === "/sign-in" || path === "/sign-up") && token) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  if (!isPublicRoute && !token) {
+  if (path === "/home" && token) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (!isPublicRoute && path.startsWith("/dashboard") && !token) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
