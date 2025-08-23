@@ -35,11 +35,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
-// Assuming these are your chart components
-// import CustomLineChart from "@/components/chart/CustomLineChart";
-// import LatestExpenseTable from "@/components/LatestExpenseTable";
 
-// --- Type Definitions for API Data ---
 interface DashboardData {
   totalExpenses: number;
   totalItems: number;
@@ -62,7 +58,6 @@ interface BudgetData {
   categories: Category[];
 }
 
-// Helper component for stat cards with the new dark theme
 const StatCard = ({ title, amount, description }: { title: string, amount: number, description: string }) => (
     <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-lg">
         <CardHeader>
