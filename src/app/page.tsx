@@ -10,6 +10,5 @@ export default async function Home() {
     redirect("/dashboard");
   }
   
-  // Otherwise, show the landing page
   return <LandingPage />;
 }
