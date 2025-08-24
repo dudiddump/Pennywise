@@ -5,10 +5,9 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -17,73 +16,77 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "@/components/ui/select";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 
-interface CustomCardProps {
-  title: string;
-  amount: number;
-  description: string;
-}
-
-const CustomCard: React.FC<CustomCardProps> = ({
+// Mengganti nama komponen menjadi CustomCard
+const CustomCard = ({
   title,
-  amount,
-  description,
+  initialAmount,
+  icon,
+}: {
+  title: string;
+  initialAmount: number;
+  icon: React.ReactNode;
 }) => {
-  const [expenseAmount, setExpenseAmount] = useState<number | null>(amount);
-  const [selectedTime, setSelectedTime] = useState<string | null>( "last 30 days");
+  const [amount, setAmount] = useState<number>(initialAmount);
+  const [selectedTime, setSelectedTime] = useState<string>("last 30 days");
+  const [description, setDescription] = useState(`Last 30 days`);
 
   const fetchData = useCallback(
     async (timeFilter: string) => {
       try {
-        const response = await axios.get<any>(
+        const response = await axios.get<ApiResponse<number | { total: number }>>(
           `/api/dashboard-data/dashboard-inside?title=${title}&time=${timeFilter}`
         );
         if (response.data.success) {
-          setExpenseAmount(response.data.data);
+            // Menyesuaikan dengan kemungkinan format data yang berbeda
+            const dataValue = typeof response.data.data === 'number' ? response.data.data : response.data.data?.total;
+            setAmount(dataValue ?? 0);
+            setDescription(`In the ${timeFilter}`);
         } else {
           console.log(response.data.message);
+          setAmount(0);
         }
       } catch (error) {
-        const axiosError = error as AxiosError<ApiResponse>;
-        let errorMessage =
-          axiosError.response?.data.message ??
-          "Error while fetching user details";
+        console.error(`Error fetching data for ${title}:`, error);
+        setAmount(0);
       }
     },
     [title]
   );
 
   useEffect(() => {
-    if (selectedTime) {
-      fetchData(selectedTime);
-    }
+    fetchData(selectedTime);
   }, [selectedTime, fetchData]);
 
+  // Update amount jika prop awal berubah (misalnya, saat data dashboard pertama kali dimuat)
+  useEffect(() => {
+    setAmount(initialAmount);
+  }, [initialAmount]);
+
   return (
-    <Card className="w-[250px] flex flex-col justify-between h-[180px] mx-auto mb-5">
-      <CardHeader>
-        <CardDescription>{description} {selectedTime}.</CardDescription>
-        <CardTitle>
-          {expenseAmount !== null
-            ? title === "Items"
-              ? `${expenseAmount}`
-              : `$${expenseAmount}`
-            : "0"}
-        </CardTitle>
+    <Card className="bg-gradient-to-br from-[#0F2334] to-[#1E3A5F] border border-white/10 rounded-2xl text-white shadow-lg flex flex-col justify-between">
+      <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
+        <div>
+          <CardDescription className="text-gray-400">{title}</CardDescription>
+          <CardTitle className="text-3xl font-bold mt-1">
+            {title === "Items" ? (amount || 0).toLocaleString() : `$${(amount || 0).toLocaleString()}`}
+          </CardTitle>
+        </div>
+        <div className="text-[#34D399] text-2xl">{icon}</div>
       </CardHeader>
-      <CardContent className="flex justify-between gap-7">
-        <span className="mt-2">{title}</span>
-        <Select  onValueChange={(value) => setSelectedTime(value)}>
-          <SelectTrigger className="w-[150px]">
+      <CardContent>
+        <p className="text-sm text-gray-500 h-4">{description}</p>
+        <Select onValueChange={setSelectedTime} defaultValue={selectedTime}>
+          <SelectTrigger className="w-full mt-3 bg-transparent border-white/20 h-9">
             <SelectValue placeholder="Select Time" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-[#0F2334] text-white border-white/20">
             <SelectGroup>
               <SelectLabel>Select Time</SelectLabel>
-              {title === "Savings" ? "" : <SelectItem value="last 7 days">Last 7 days</SelectItem>}
+              {title !== "Savings" && <SelectItem value="last 7 days">Last 7 days</SelectItem>}
               <SelectItem value="last 30 days">Last 30 days</SelectItem>
               <SelectItem value="last month">Last month</SelectItem>
               <SelectItem value="last 6 months">Last 6 months</SelectItem>
@@ -97,12 +100,3 @@ const CustomCard: React.FC<CustomCardProps> = ({
 };
 
 export default CustomCard;
-
-
-/*
-Saving money for this moth
-
-Total Expense 
-
-Latest Total Budget
- */

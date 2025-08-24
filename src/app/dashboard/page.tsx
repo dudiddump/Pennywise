@@ -25,7 +25,9 @@ import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaPlus, FaPiggyBank, FaArrowDown, FaArrowUp } from "react-icons/fa";
 
-// Interface untuk tipe data
+import CustomCard from "@/components/CustomCard";
+import LatestExpensesTable from "@/components/LatestExpenseTable";
+
 interface DashboardData {
   totalExpenses: number;
   totalItems: number;
@@ -48,156 +50,6 @@ interface BudgetData {
   categories: Category[];
 }
 
-interface Expense {
-    _id: string;
-    date: string;
-    category: string;
-    amount: number;
-}
-
-// Komponen StatCard dengan filter waktu
-const StatCard = ({
-  title,
-  initialAmount,
-  icon,
-}: {
-  title: string;
-  initialAmount: number;
-  icon: React.ReactNode;
-}) => {
-  const [amount, setAmount] = useState(initialAmount);
-  const [description, setDescription] = useState("All time data");
-  const [selectedTime, setSelectedTime] = useState("all time");
-
-  const fetchData = useCallback(async (timeFilter: string) => {
-      if (timeFilter === "all time") {
-        setAmount(initialAmount);
-        setDescription("All time data");
-        return;
-      }
-      try {
-        const response = await axios.get<ApiResponse<number>>(
-          `/api/dashboard-data/dashboard-inside?title=${title}&time=${timeFilter}`
-        );
-        if (response.data.success && typeof response.data.data === 'number') {
-          setAmount(response.data.data);
-          setDescription(`In the ${timeFilter}`);
-        } else {
-          setAmount(0);
-        }
-      } catch (error) {
-        console.error(`Error fetching data for ${title}:`, error);
-        setAmount(0);
-      }
-    }, [title, initialAmount]);
-
-  useEffect(() => {
-    fetchData(selectedTime);
-  }, [selectedTime, fetchData]);
-  
-  useEffect(() => {
-    if (selectedTime === 'all time') {
-        setAmount(initialAmount);
-    }
-  }, [initialAmount, selectedTime]);
-
-  return (
-    <Card className="bg-gradient-to-br from-[#0F2334] to-[#1E3A5F] border border-white/10 rounded-2xl text-white shadow-lg flex flex-col justify-between">
-      <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
-        <div>
-          <CardDescription className="text-gray-400">{title}</CardDescription>
-          <CardTitle className="text-3xl font-bold mt-1">
-            ${(amount || 0).toLocaleString()}
-          </CardTitle>
-        </div>
-        <div className="text-[#34D399] text-2xl">{icon}</div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-gray-500 h-4">{description}</p>
-        <Select onValueChange={setSelectedTime} defaultValue="all time">
-          <SelectTrigger className="w-full mt-3 bg-transparent border-white/20 h-9">
-            <SelectValue placeholder="Select Time" />
-          </SelectTrigger>
-          <SelectContent className="bg-[#0F2334] text-white border-white/20">
-            <SelectItem value="all time">All Time</SelectItem>
-            <SelectItem value="last 7 days">Last 7 days</SelectItem>
-            <SelectItem value="last 30 days">Last 30 days</SelectItem>
-            <SelectItem value="last year">Last year</SelectItem>
-          </SelectContent>
-        </Select>
-      </CardContent>
-    </Card>
-  );
-};
-
-// Komponen LatestExpensesTable
-const LatestExpensesTable = () => {
-    const [expenses, setExpenses] = useState<Expense[]>([]);
-    const router = useRouter();
-  
-    const fetchUserExpenses = useCallback(async () => {
-      try {
-        const response = await axios.get<ApiResponse<Expense[]>>("/api/expense/get-expenses", {
-          params: { page: 1, limit: 5 },
-        });
-  
-        if (response.data.success && Array.isArray(response.data.data)) {
-          setExpenses(response.data.data);
-        }
-      } catch (error) {
-        console.error("Error while fetching expenses details", error);
-      }
-    }, []);
-  
-    useEffect(() => {
-      fetchUserExpenses();
-    }, [fetchUserExpenses]);
-  
-    const formatDate = (dateString: string) => new Date(dateString).toLocaleDateString();
-  
-    return (
-      <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-xl hover:shadow-[#34D399]/30 transition">
-        <CardHeader className="flex flex-row justify-between items-center">
-            <CardTitle className="text-2xl font-bold">Recent Expenses</CardTitle>
-            <Button variant="ghost" onClick={() => router.push('/my-expenses')} className="text-[#34D399] font-bold hover:bg-white/10">
-                See All
-            </Button>
-        </CardHeader>
-        <CardContent>
-            <div className="relative overflow-x-auto">
-                <table className="w-full text-sm text-left text-gray-300">
-                    <thead className="text-xs text-gray-400 uppercase bg-white/10">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">Date</th>
-                            <th scope="col" className="px-6 py-3">Category</th>
-                            <th scope="col" className="px-6 py-3 text-right">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {expenses.length > 0 ? (
-                            expenses.map((expense) => (
-                                <tr key={expense._id} className="border-b border-white/10 hover:bg-white/5">
-                                    <td className="px-6 py-4">{formatDate(expense.date)}</td>
-                                    <td className="px-6 py-4">{expense.category}</td>
-                                    <td className="px-6 py-4 text-right">${expense.amount.toFixed(2)}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan={3} className="text-center py-10 text-gray-500">
-                                    No recent expenses found.
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
-        </CardContent>
-      </Card>
-    );
-};
-
-
 // Komponen Utama Dashboard
 const Dashboard = () => {
   const { data: session } = useSession();
@@ -207,16 +59,29 @@ const Dashboard = () => {
   const [budgetCategories, setBudgetCategories] = useState<BudgetData | null>(null);
   const { toast } = useToast();
   const router = useRouter();
+
+  // State untuk filter waktu chart
   const [chartTimeFrame, setChartTimeFrame] = useState('last 30 days');
 
   const fetchDashboardData = useCallback(async () => {
     try {
       const response = await axios.get<ApiResponse<DashboardData>>("/api/dashboard-data");
       if (response.data.success && response.data.data) {
-        setDashboardData(response.data.data);
+        setDashBoardData(response.data.data);
       }
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
+    }
+  }, []);
+
+  const fetchSavingGoal = useCallback(async () => {
+    try {
+        const response = await axios.get<ApiResponse<SavingGoalData>>("/api/save/get-goal");
+        if (response.data.success && response.data.data) {
+            setSaveData(response.data.data);
+        }
+    } catch (error) {
+        console.error("Error fetching saving goal:", error);
     }
   }, []);
 
@@ -269,17 +134,17 @@ const Dashboard = () => {
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <StatCard
+              <CustomCard
                 title="Total Income"
                 initialAmount={dashboardData?.savings || 0}
                 icon={<FaArrowUp />}
               />
-              <StatCard
+              <CustomCard
                 title="Total Expense"
                 initialAmount={dashboardData?.totalExpenses || 0}
                 icon={<FaArrowDown />}
               />
-              <StatCard
+              <CustomCard
                 title="Balance"
                 initialAmount={(dashboardData?.savings || 0) - (dashboardData?.totalExpenses || 0)}
                 icon={<FaPiggyBank />}
