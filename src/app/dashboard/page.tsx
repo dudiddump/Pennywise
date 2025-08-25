@@ -25,9 +25,7 @@ import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaPlus, FaPiggyBank, FaArrowDown, FaArrowUp } from "react-icons/fa";
 
-import CustomCard from "@/components/CustomCard";
-import LatestExpensesTable from "@/components/LatestExpenseTable";
-
+// Interface untuk tipe data
 interface DashboardData {
   totalExpenses: number;
   totalItems: number;
@@ -54,7 +52,7 @@ interface BudgetData {
 const Dashboard = () => {
   const { data: session } = useSession();
   const user: User = session?.user;
-  const [dashboardData, setDashBoardData] = useState<DashboardData | null>(null);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [saveData, setSaveData] = useState<SavingGoalData | null>(null);
   const [budgetCategories, setBudgetCategories] = useState<BudgetData | null>(null);
   const { toast } = useToast();
@@ -71,17 +69,6 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
-    }
-  }, []);
-
-  const fetchSavingGoal = useCallback(async () => {
-    try {
-        const response = await axios.get<ApiResponse<SavingGoalData>>("/api/save/get-goal");
-        if (response.data.success && response.data.data) {
-            setSaveData(response.data.data);
-        }
-    } catch (error) {
-        console.error("Error fetching saving goal:", error);
     }
   }, []);
 

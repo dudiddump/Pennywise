@@ -82,12 +82,16 @@ const LandingPage = () => {
         <div className="flex-grow flex flex-col items-center justify-center w-full">
           <main className="flex flex-col items-center text-center w-full">
             <div className="flex items-center gap-3 mb-4">
+<<<<<<< HEAD
                 <img 
                 src="/pennywise-logo.png" 
                 alt="Pennywise" 
                 width={40} 
                 height={40} 
                 className="h-10 w-10 md:h-12 md:w-12 rounded-full" />
+=======
+                <Image src="/pennywise-logo.png" alt="Pennywise Logo" width={50} height={50} className="h-10 w-10 md:h-12 md:w-12" />
+>>>>>>> a17ffeb (update)
             </div>
 
             <h2 className="text-5xl sm:text-6xl font-extrabold leading-tight">
