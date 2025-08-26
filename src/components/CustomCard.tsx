@@ -17,10 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 
-// Mengganti nama komponen menjadi CustomCard
 const CustomCard = ({
   title,
   initialAmount,
@@ -31,22 +30,25 @@ const CustomCard = ({
   icon: React.ReactNode;
 }) => {
   const [amount, setAmount] = useState<number>(initialAmount);
-  const [selectedTime, setSelectedTime] = useState<string>("last 30 days");
-  const [description, setDescription] = useState(`Last 30 days`);
+  const [selectedTime, setSelectedTime] = useState<string>("all time");
+  const [description, setDescription] = useState("All time data");
 
   const fetchData = useCallback(
     async (timeFilter: string) => {
+      if (timeFilter === "all time") {
+        setAmount(initialAmount);
+        setDescription("All time data");
+        return;
+      }
       try {
         const response = await axios.get<ApiResponse<number | { total: number }>>(
           `/api/dashboard-data/dashboard-inside?title=${title}&time=${timeFilter}`
         );
         if (response.data.success) {
-            // Menyesuaikan dengan kemungkinan format data yang berbeda
             const dataValue = typeof response.data.data === 'number' ? response.data.data : response.data.data?.total;
             setAmount(dataValue ?? 0);
             setDescription(`In the ${timeFilter}`);
         } else {
-          console.log(response.data.message);
           setAmount(0);
         }
       } catch (error) {
@@ -54,46 +56,44 @@ const CustomCard = ({
         setAmount(0);
       }
     },
-    [title]
+    [title, initialAmount]
   );
 
   useEffect(() => {
     fetchData(selectedTime);
   }, [selectedTime, fetchData]);
 
-  // Update amount jika prop awal berubah (misalnya, saat data dashboard pertama kali dimuat)
   useEffect(() => {
-    setAmount(initialAmount);
-  }, [initialAmount]);
+    if (selectedTime === 'all time') {
+        setAmount(initialAmount);
+    }
+  }, [initialAmount, selectedTime]);
 
   return (
-    <Card className="bg-gradient-to-br from-[#0F2334] to-[#1E3A5F] border border-white/10 rounded-2xl text-white shadow-lg flex flex-col justify-between">
-      <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
-        <div>
-          <CardDescription className="text-gray-400">{title}</CardDescription>
-          <CardTitle className="text-3xl font-bold mt-1">
-            {title === "Items" ? (amount || 0).toLocaleString() : `$${(amount || 0).toLocaleString()}`}
-          </CardTitle>
-        </div>
-        <div className="text-[#34D399] text-2xl">{icon}</div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-gray-500 h-4">{description}</p>
-        <Select onValueChange={setSelectedTime} defaultValue={selectedTime}>
-          <SelectTrigger className="w-full mt-3 bg-transparent border-white/20 h-9">
-            <SelectValue placeholder="Select Time" />
+    <Card className="bg-gradient-to-br from-[#0F2334] to-[#1E3A5F] border border-white/10 rounded-2xl text-white shadow-lg">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium text-gray-400">{title}</CardTitle>
+        <Select onValueChange={setSelectedTime} defaultValue="all time">
+          <SelectTrigger className="w-auto h-7 text-xs bg-transparent border-white/20 px-2 focus:ring-0 focus:ring-offset-0">
+            <SelectValue placeholder="Time" />
           </SelectTrigger>
           <SelectContent className="bg-[#0F2334] text-white border-white/20">
             <SelectGroup>
               <SelectLabel>Select Time</SelectLabel>
-              {title !== "Savings" && <SelectItem value="last 7 days">Last 7 days</SelectItem>}
+              <SelectItem value="all time">All Time</SelectItem>
+              <SelectItem value="last 7 days">Last 7 days</SelectItem>
               <SelectItem value="last 30 days">Last 30 days</SelectItem>
-              <SelectItem value="last month">Last month</SelectItem>
-              <SelectItem value="last 6 months">Last 6 months</SelectItem>
               <SelectItem value="last year">Last year</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center gap-2">
+            <div className="text-[#34D399] text-xl">{icon}</div>
+            <div className="text-2xl font-bold">${(amount || 0).toLocaleString()}</div>
+        </div>
+        <p className="text-xs text-gray-500 mt-1 h-4">{description}</p>
       </CardContent>
     </Card>
   );

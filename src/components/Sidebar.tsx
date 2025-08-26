@@ -31,10 +31,10 @@ export default function Sidebar({ onClose }: SidebarProps) {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-[#091C2D] text-gray-200 p-4">
-      {/* Logo */}
-      <div className="flex items-center gap-2 mb-8">
-        <span className="text-2xl font-bold text-teal-400">💰 Pennywise</span>
+    // Kelas untuk menyembunyikan di mobile diletakkan di sini
+    <aside className="hidden lg:flex flex-col h-full bg-[#091C2D] text-gray-200 p-4 w-64 border-r border-white/10">
+      <div className="flex items-center gap-2 mb-5 justify-center">
+        <img src="/pennywise-logo.png" alt="logo" className="h-12 w-12" />
       </div>
 
       {/* Navigation */}
@@ -44,6 +44,7 @@ export default function Sidebar({ onClose }: SidebarProps) {
           const active = pathname.startsWith(item.href);
 
           return (
+            // Tag <aside> yang salah sudah dihapus dari sini
             <Link
               key={item.name}
               href={item.href}
@@ -80,6 +81,6 @@ export default function Sidebar({ onClose }: SidebarProps) {
           Logout
         </button>
       </div>
-    </div>
+    </aside>
   );
 }
