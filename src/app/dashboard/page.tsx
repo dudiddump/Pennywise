@@ -25,7 +25,9 @@ import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaPlus, FaPiggyBank, FaArrowDown, FaArrowUp } from "react-icons/fa";
 
-// Interface untuk tipe data
+import CustomCard from "@/components/CustomCard"; 
+import LatestExpensesTable from "@/components/LatestExpenseTable";
+
 interface DashboardData {
   totalExpenses: number;
   totalItems: number;
@@ -48,7 +50,6 @@ interface BudgetData {
   categories: Category[];
 }
 
-// Komponen Utama Dashboard
 const Dashboard = () => {
   const { data: session } = useSession();
   const user: User = session?.user;
@@ -57,18 +58,27 @@ const Dashboard = () => {
   const [budgetCategories, setBudgetCategories] = useState<BudgetData | null>(null);
   const { toast } = useToast();
   const router = useRouter();
-
-  // State untuk filter waktu chart
   const [chartTimeFrame, setChartTimeFrame] = useState('last 30 days');
 
   const fetchDashboardData = useCallback(async () => {
     try {
       const response = await axios.get<ApiResponse<DashboardData>>("/api/dashboard-data");
       if (response.data.success && response.data.data) {
-        setDashBoardData(response.data.data);
+        setDashboardData(response.data.data);
       }
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
+    }
+  }, []);
+
+  const fetchSavingGoal = useCallback(async () => {
+    try {
+      const response = await axios.get<ApiResponse<SavingGoalData>>("/api/save/get-goal");
+      if (response.data.success && response.data.data) {
+        setSaveData(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching saving goal:", error);
     }
   }, []);
 
@@ -106,7 +116,7 @@ const Dashboard = () => {
         <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
           <div>
             <h1 className="text-4xl font-extrabold bg-gradient-to-r from-[#34D399] to-[#3B82F6] bg-clip-text text-transparent">
-              Hello, {user?.username || "Guest"}
+              Hello, {user?.username || "Guest"}!
             </h1>
             <p className="text-gray-400 mt-2">
               Welcome back and see your progress!
@@ -120,7 +130,7 @@ const Dashboard = () => {
 
         <main className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-4">
               <CustomCard
                 title="Total Income"
                 initialAmount={dashboardData?.savings || 0}
