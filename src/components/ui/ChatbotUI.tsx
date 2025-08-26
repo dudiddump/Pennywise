@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Bot, Loader2 } from "lucide-react";
+import { Sparkles, Bot, Loader2, Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const prompts = [
   "Track my monthly expenses",
@@ -13,7 +15,7 @@ const prompts = [
   "How much emergency fund do I need?"
 ];
 
-export default function FinanceAssistant() {
+export default function FinanceAssistantPage() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState("");
@@ -24,7 +26,7 @@ export default function FinanceAssistant() {
     setResponse("");
 
     try {
-      // Replace this with your actual backend call
+      // Ganti ini dengan panggilan backend Anda yang sebenarnya
       const res = await fetch("/api/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,79 +44,84 @@ export default function FinanceAssistant() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!query.trim()) return;
     askBot(query);
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="min-h-screen bg-[#0F172A] text-white p-6 max-w-4xl mx-auto"
+      transition={{ duration: 0.5 }}
+      className="p-6 w-full font-poppins text-white"
     >
-      <div className="text-center mb-6">
-        <h1 className="text-3xl font-bold text-purple-400 flex justify-center items-center gap-2">
-          <Bot size={28} className="text-purple-400" />
-          Pennywise AI Assistant
-        </h1>
-        <p className="text-sm text-gray-400 mt-2">Ask anything about your finances</p>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-        {prompts.map((item, i) => (
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            key={i}
-            className="bg-[#1E293B] hover:bg-purple-600 text-white p-4 rounded-md border border-slate-700 flex items-start gap-2"
-            onClick={() => askBot(item)}
-          >
-            <Sparkles className="text-purple-300 mt-1" size={20} />
-            {item}
-          </motion.button>
-        ))}
-      </div>
-
-      <form onSubmit={handleSubmit} className="flex items-center gap-3 mb-4">
-        <input
-          className="flex-1 p-3 rounded-md text-black outline-none"
-          placeholder="Enter your financial question..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded"
-        >
-          Ask
-        </button>
-      </form>
-
-      {loading && (
-        <div className="flex items-center gap-2 text-purple-300 mt-6 animate-pulse">
-          <Loader2 className="animate-spin" size={20} />
-          Thinking...
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-[#34D399] to-[#3B82F6] bg-clip-text text-transparent flex justify-center items-center gap-3">
+            <Bot size={32} />
+            Pennywise AI Assistant
+          </h1>
+          <p className="text-md text-gray-400 mt-2">Ask anything about your finances</p>
         </div>
-      )}
 
-      {!loading && response && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mt-6 p-4 bg-[#1E293B] rounded border border-purple-500"
-        >
-          <h2 className="text-lg font-semibold text-purple-400 mb-2">
-            📌 Answer:
-          </h2>
-          <p className="text-white whitespace-pre-line">{response}</p>
-        </motion.div>
-      )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          {prompts.map((item, i) => (
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.03, borderColor: '#34D399' }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              key={i}
+              className="bg-white/5 text-gray-200 p-4 rounded-lg border border-white/10 text-left flex items-start gap-3"
+              onClick={() => askBot(item)}
+            >
+              <Sparkles className="text-teal-400 mt-1 flex-shrink-0" size={20} />
+              <span>{item}</span>
+            </motion.button>
+          ))}
+        </div>
 
-      <p className="text-xs text-center mt-10 text-gray-400">
-        Content is generated by AI and is for reference only.
-      </p>
+        <form onSubmit={handleSubmit} className="flex items-center gap-3 mb-4 sticky bottom-24 lg:bottom-4 z-10">
+          <Input
+            className="flex-1 p-3 h-12 rounded-lg bg-[#1C2A3A] border-white/20 focus-visible:ring-1 focus-visible:ring-teal-400 focus-visible:ring-offset-0"
+            placeholder="Enter your financial question..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <Button
+            type="submit"
+            size="icon"
+            className="h-12 w-12 bg-gradient-to-r from-[#34D399] to-[#3B82F6] text-white"
+            disabled={loading}
+          >
+            <Send size={20} />
+          </Button>
+        </form>
+
+        {loading && (
+          <div className="flex items-center justify-center gap-2 text-teal-400 mt-6">
+            <Loader2 className="animate-spin" size={20} />
+            Thinking...
+          </div>
+        )}
+
+        {!loading && response && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mt-6 p-5 bg-white/5 rounded-lg border border-teal-400/30"
+          >
+            <h2 className="text-lg font-semibold text-teal-400 mb-2 flex items-center gap-2">
+              <Bot size={20} /> Answer:
+            </h2>
+            <p className="text-gray-300 whitespace-pre-line">{response}</p>
+          </motion.div>
+        )}
+
+        <p className="text-xs text-center mt-10 text-gray-500">
+          Content is generated by AI and is for reference only.
+        </p>
+      </div>
     </motion.div>
   );
 }
