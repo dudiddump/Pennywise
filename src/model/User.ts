@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface User extends Document {
+// Interface diperbarui dengan field baru
+export interface User extends Document {
   fullName: string;
   username: string;
   email: string;
@@ -11,6 +12,9 @@ interface User extends Document {
   isVerified: boolean;
   currency: string;
   monthlySalary: number;
+  savingsPercentage: number;   // Field baru
+  isBudgetConfirmed: boolean;  // Field baru
+  onboardingCompleted: boolean; // Field baru
 }
 
 const UserSchema: Schema<User> = new mongoose.Schema({
@@ -57,9 +61,21 @@ const UserSchema: Schema<User> = new mongoose.Schema({
     currency: {
       type: String,
       enum: ["USD", "EUR", "GBP", "JPY", "BDT"],
-      default: "USD", // Default currency
+      default: "USD",
     },
-
+    // Field baru ditambahkan di sini
+    savingsPercentage: {
+        type: Number,
+        default: 20 // Default 20%
+    },
+    isBudgetConfirmed: {
+        type: Boolean,
+        default: false
+    },
+    onboardingCompleted: {
+        type: Boolean,
+        default: false
+    }
   },
   { timestamps: true }
 );
