@@ -13,10 +13,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, User as UserIcon, Mail, DollarSign, Percent } from 'lucide-react';
+import { Loader2, Mail } from 'lucide-react';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 
-// Skema validasi untuk form profil
 const profileSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   monthlySalary: z.number().min(0, "Salary must be a positive number"),
@@ -37,8 +36,7 @@ const MyProfilePage = () => {
       savingsPercentage: 20,
     },
   });
-
-  // Fungsi untuk mengambil data profil terbaru
+  
   const fetchProfileData = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -70,7 +68,6 @@ const MyProfilePage = () => {
       const response = await axios.put<ApiResponse>('/api/user/update-profile', data);
       toast({ title: "Success", description: response.data.message });
       
-      // Update sesi NextAuth agar data baru langsung terlihat di seluruh aplikasi
       await update({
         ...session,
         user: {

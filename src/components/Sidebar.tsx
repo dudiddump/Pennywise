@@ -23,8 +23,7 @@ type SidebarProps = {
 export default function Sidebar({ onClose }: SidebarProps) {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-
-  // PERBAIKAN: Menyesuaikan href dengan struktur folder Anda
+  
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "My Profile", href: "/my-profile", icon: User },
@@ -40,7 +39,6 @@ export default function Sidebar({ onClose }: SidebarProps) {
         <img src="/pennywise-logo.png" alt="logo" className="h-12 w-12" />
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => {
           const Icon = item.icon;

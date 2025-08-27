@@ -31,7 +31,7 @@ const AppHeader = () => {
   const title = titles[pathname] || "Pennywise";
 
   return (
-    <header className="sticky top-2 pb-2 z-40 h-20 bg-[#091C2D]/90 backdrop-blur border-b border-white/10">
+    <header className="sticky z-40 h-20 bg-[#091C2D]/90 backdrop-blur border-b border-white/10">
       <div className="h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Image

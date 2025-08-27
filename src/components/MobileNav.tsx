@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 
-// Definisikan item navigasi di sini agar konsisten
 const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "My Profile", href: "/my-profile", icon: User },
@@ -41,7 +40,6 @@ const MobileNav = () => {
           <Menu size={28} />
         </button>
       </SheetTrigger>
-      {/* Menambahkan padding atas (pt-8) agar tidak terlalu ke atas */}
       <SheetContent side="left" className="bg-[#091C2D] border-r-0 text-white px-4 pt-8 pb-4 flex flex-col">
         <div className="flex items-center gap-2 mb-8">
             <img src="/pennywise-logo.png" alt="logo" className="h-10 w-10" />

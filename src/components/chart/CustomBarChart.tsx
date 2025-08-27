@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -8,35 +8,72 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
   ResponsiveContainer,
+  Cell
 } from "recharts";
+import axios from "axios";
+import { ApiResponse } from "@/types/ApiResponse";
+import { useTheme } from "next-themes";
+
+interface BarChartProps {
+  range: string;
+}
 
 interface ChartData {
   name: string;
-  spent: number;
-  limit: number;
+  expenses: number;
+  savings: number;
 }
 
-const CustomBarChart = ({ data }: { data: ChartData[] }) => {
+// Custom tooltip component
+const CustomTooltip = ({ active, payload, theme }: any) => {
+  if (active && payload && payload.length) {
+    const isDark = theme === 'dark';
+    return (
+      <div className={`rounded-lg border ${isDark ? 'border-white/20 bg-[#0F2334]' : 'border-gray-300 bg-white'} p-3 text-sm shadow-lg`}>
+        <p className={`label font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{`${payload[0].payload.name}`}</p>
+        <p style={{ color: payload[0].fill }}>{`Expenses: $${payload[0].value}`}</p>
+        <p style={{ color: payload[1].fill }}>{`Savings: $${payload[1].value}`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
+const CustomBarChart: React.FC<BarChartProps> = ({ range }) => {
+  const [chartData, setChartData] = useState<ChartData[]>([]);
+  const { theme } = useTheme();
+
+  const fetchChartData = useCallback(async () => {
+    try {
+      const response = await axios.get<ApiResponse<ChartData[]>>(`/api/dashboard-data/barChart-data?range=${range}`);
+      if (response.data.success && Array.isArray(response.data.data)) {
+        setChartData(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error while fetching bar chart data:", error);
+    }
+  }, [range]);
+
+  useEffect(() => {
+    fetchChartData();
+  }, [fetchChartData]);
+
+  const tickColor = theme === 'dark' ? '#888' : '#333';
+
   return (
-    <div className="w-full h-[300px] bg-[#0C1320]/80 p-4 rounded-2xl border border-white/10 shadow-lg">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
-          <XAxis dataKey="name" stroke="#CBD5E1" />
-          <YAxis stroke="#CBD5E1" />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: "#1E293B",
-              border: "1px solid #334155",
-              color: "#fff",
-            }}
-          />
-          <Bar dataKey="spent" fill="#34D399" radius={[6, 6, 0, 0]} />
-          <Bar dataKey="limit" fill="#60A5FA" radius={[6, 6, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer width="100%" height={350}>
+      <BarChart data={chartData}>
+        <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"} />
+        <XAxis dataKey="name" stroke={tickColor} fontSize={12} />
+        <YAxis stroke={tickColor} fontSize={12} />
+        <Tooltip content={<CustomTooltip theme={theme} />} />
+        <Legend wrapperStyle={{ color: tickColor }} />
+        <Bar dataKey="expenses" fill="#82ca9d" name="Expenses" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="savings" fill="#8884d8" name="Savings" radius={[4, 4, 0, 0]} />
+      </BarChart>
+    </ResponsiveContainer>
   );
 };
 

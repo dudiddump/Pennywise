@@ -1,11 +1,17 @@
-import MobileNav from "@/components/MobileNav";
+"use client";
+
+import React, { useState } from 'react';
+import AppHeader from "@/components/AppHeader";
 import Sidebar from "@/components/Sidebar";
+import BottomNavbar from "@/components/BottomNavbar";
 
 export default function MainAppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="relative min-h-screen bg-[#091C2D] text-white">
       <div className="absolute top-0 left-0 -z-10 h-full w-full overflow-hidden">
@@ -15,14 +21,15 @@ export default function MainAppLayout({
 
       <div className="flex h-screen">
         <Sidebar />
-
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <MobileNav />
-          <main className="flex-1">
+        
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <AppHeader />
+          <main className="flex-1 overflow-y-auto pb-24 lg:pb-0">
             {children}
           </main>
         </div>
       </div>
+      <BottomNavbar />
     </div>
   );
 }

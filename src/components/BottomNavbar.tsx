@@ -17,24 +17,20 @@ const BottomNavbar = () => {
         { href: "/my-ai-chat", icon: MessageSquare, label: "Chat AI" },
     ];
 
-    const [activeIndex, setActiveIndex] = useState(2); // Default ke Home
-
-    // Update index aktif jika path berubah
+    const [activeIndex, setActiveIndex] = useState(2);
+    
     useEffect(() => {
-        // Cari match yang paling spesifik dulu (misal /dashboard/details jangan match dengan /dashboard)
         const sortedItems = [...navItems].sort((a, b) => b.href.length - a.href.length);
         const newActiveIndex = sortedItems.findIndex(item => pathname.startsWith(item.href));
         
         if (newActiveIndex !== -1) {
-            // Dapatkan index asli dari item yang cocok
             const originalIndex = navItems.findIndex(item => item.href === sortedItems[newActiveIndex].href);
             setActiveIndex(originalIndex);
         }
     }, [pathname]);
 
     return (
-        // Beri padding atas pada footer untuk memberi ruang bagi ikon yang naik
-        <footer className="fixed bottom-0 left-0 right-0 z-50 bg-[#0F2334] border-t border-white/10 pt-2 px-2 lg:hidden">
+        <footer className="fixed bottom-0 left-0 right-0 z-50 bg-[#0F2334] border-t border-white/10 px-1 lg:hidden">
             <div className="relative flex justify-around items-end h-14">
                 {navItems.map((item, index) => {
                     const isActive = activeIndex === index;
@@ -53,11 +49,10 @@ const BottomNavbar = () => {
                             )}>
                                 <item.icon size={24} className={cn(isActive ? "text-white" : "text-gray-400")} />
                             </div>
-
-                            {/* Label Teks */}
+                            
                             <span className={cn(
                                 "text-xs text-gray-400 transition-opacity duration-200",
-                                isActive ? "opacity-0" : "opacity-100" // Sembunyikan label saat aktif
+                                isActive ? "opacity-0" : "opacity-100"
                             )}>
                                 {item.label}
                             </span>

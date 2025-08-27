@@ -27,7 +27,7 @@ export async function PUT(request: Request) {
                 monthlySalary,
                 savingsPercentage,
             },
-            { new: true }
+            { new: true } // Mengembalikan dokumen yang sudah di-update
         );
 
         if (!updatedUser) {
