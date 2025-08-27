@@ -1,241 +1,164 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { format } from "date-fns";
-import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { CalendarIcon, Loader2 } from "lucide-react";
-import React, { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import axios, { AxiosError } from "axios";
-import { ApiResponse } from "@/types/ApiResponse";
-import ReactMarkdown, { Components } from 'react-markdown';
 
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { ArrowLeft, X, Lock } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { User } from 'next-auth';
 
-
-
-const MyFeedBack = () => {
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [feedback, setFeedback] = useState<any>({});
-  const { toast } = useToast();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const response = await axios.post("/api/feedback", {
-        startDate,
-        endDate,
-      });
-
-      if (response.data.success) {
-        setFeedback(response.data.data);
-        toast({
-          title: "Success",
-          description: response.data.message,
-        });
-      }
-
-      setIsSubmitting(false);
-    } catch (error) {
-      console.error("Error during expense creation:", error);
-
-      const axiosError = error as AxiosError<ApiResponse>;
-
-      // Default error message
-      let errorMessage =
-        axiosError.response?.data.message ??
-        "There was a problem with your request. Please try again.";
-
-      toast({
-        title: "Failed getting Feedback",
-        description: errorMessage,
-        variant: "destructive",
-      });
-
-      setIsSubmitting(false);
-    }
-  };
-
-  const customComponents: Components = {
-    h1: ({ node, ...props }) => (
-      <h1 className="text-xl mb-2 font-bold text-gray-300" {...props} />
-    ),
-    h2: ({ node, ...props }) => (
-      <h2 className="text-lg mb-1 font-semibold text-gray-300" {...props} />
-    ),
-    h3: ({ node, ...props }) => (
-      <h3 className="text-md font-medium py-1 text-gray-300" {...props} />
-    ),
-    p: ({ node, ...props }) => (
-      <p className="text-gray-300 py-1 leading-relaxed" {...props} />
-    ),
-    ul: ({ node, ...props }) => (
-      <ul className="list-disc list-inside text-gray-300 mb-2" {...props} />
-    ),
-    li: ({ node, ...props }) => (
-      <li className="text-gray-300 py-3" {...props} />
-    ),
-  };
-
-  return (
-    <div className="py-10 flex flex-col">
-      <div className="flex flex-col px-10 gap-5">
-        <h1 className="text-lg xl:text-xl font-extrabold text-gray-400">
-          AI-Powered Personalized Expense Optimization
-        </h1>
-        <p className="bg-gray-700 p-5 rounded-xl">
-          Leverage AI to provide users with tailored recommendations for
-          optimizing their expense allocation, helping them achieve their
-          savings goals efficiently. This feature analyzes users financial data
-          and offers actionable insights to improve their budgeting strategies.
-        </p>
-      </div>
-      <div className="mt-10 px-10">
-        <Card className="w-full lg:w-[600px]">
-          <CardHeader>
-            <CardTitle>Get Feedback</CardTitle>
-            <CardDescription>
-              Get Personalized Expense Feedback in one-click.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="startDate">Start Date</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full justify-start text-left font-normal",
-                          !startDate && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {startDate ? (
-                          format(startDate, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={startDate}
-                        onSelect={setStartDate}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
+// Komponen Pop-up Langganan dengan desain baru
+const SubscriptionPopup = ({ open, onOpenChange }: { open: boolean, onOpenChange: (open: boolean) => void }) => (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="bg-transparent border-none p-0 max-w-sm overflow-visible">
+            <div className="relative p-[1.5px] bg-gradient-to-b from-teal-400/50 to-transparent rounded-2xl">
+                <div className="bg-[#1C2A3A] rounded-[15px] p-8">
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-bold text-center text-white">Subscription</DialogTitle>
+                        <DialogDescription className="text-center text-gray-400 pt-2">
+                            Pay to continue this feature
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="pt-4">
+                        <Button className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 text-base">
+                            PAY
+                        </Button>
+                    </div>
                 </div>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="endDate">End Date</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full justify-start text-left font-normal",
-                          !endDate && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {endDate ? (
-                          format(endDate, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={endDate}
-                        onSelect={setEndDate}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-              </div>
-              <CardFooter className="flex justify-end mt-3 ml-6 w-full">
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Please wait
-                    </>
-                  ) : (
-                    "Submit"
-                  )}
+            </div>
+            <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => onOpenChange(false)}
+                className="absolute -top-3 -right-3 text-gray-400 hover:text-white bg-[#1C2A3A] rounded-full border border-teal-400/50 h-8 w-8"
+            >
+                <X size={20} />
+            </Button>
+        </DialogContent>
+    </Dialog>
+);
+
+
+// Komponen Utama Halaman AI Feedback
+const AIFeedbackPage = () => {
+    const router = useRouter();
+    const { data: session } = useSession();
+    const user: User = session?.user;
+
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [feedback, setFeedback] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+    const isSubscribed = (user as any)?.isSubscribed || false;
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setHasSubmitted(true);
+
+        if (!isSubscribed) {
+            setIsPopupOpen(true);
+            return;
+        }
+        
+        setIsLoading(true);
+        setFeedback(null);
+        setTimeout(() => {
+            setFeedback("Here is your personalized expense feedback based on the selected dates.");
+            setIsLoading(false);
+        }, 2000);
+    };
+
+    return (
+        <div className="relative flex flex-col min-h-screen bg-[#091C2D] text-white font-poppins p-4">
+            
+            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-teal-500/30 to-transparent -z-0"></div>
+
+            <main className="relative z-10 flex-grow overflow-y-auto">
+                <Button variant="ghost" size="icon" onClick={() => router.back()} className="mb-4">
+                    <ArrowLeft />
                 </Button>
-              </CardFooter>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-      <div className="my-10 px-10">
-        <div className="bg-gray-700 py-5 px-5 rounded-xl">
-          <h1 className="text-gray-300 font-semibold">
-            Your Personalized Expense Feeback are here
-          </h1>
 
-          {feedback && (
-            <>
-              <div>
-                <h2 className="text-lg text-gray-300 font-semibold">
-                  Income Overview:
-                </h2>
-                <ul className="list-disc list-inside text-gray-300">
-                  <li>Monthly Salary: {feedback.monthlySalary}</li>
-                  <li>Current Savings: {feedback.currentSave}</li>
-                  <li>Savings Goal: {feedback.goalAmount}</li>
-                </ul>
-              </div>
-              <div className="mt-4">
-                <h2 className="text-lg text-gray-300 font-semibold">
-                  Expense Analysis:
-                </h2>
-                <ul className="list-disc list-inside text-gray-300">
-                  {feedback?.expensesByCategory?.map(
-                    (expense: any, index: number) => (
-                      <li key={index}>
-                        {expense._id}: ${expense.totalAmount}
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
+                <div className="text-center mb-8">
+                    <h1 className="text-2xl font-bold">AI-Powered Personalized Expense Optimization</h1>
+                    <p className="text-sm text-gray-400 mt-2 max-w-md mx-auto">
+                        This feature analyzes users financial data and offers actionable insights to improve your budgeting strategies
+                    </p>
+                </div>
 
-              <div className="mt-4">
-                <ReactMarkdown components={customComponents}>
-                  {feedback.recommendations}
-                </ReactMarkdown>
-              </div>
-            </>
-          )}
+                <Card className="bg-[#1C2A3A] border border-white/10 rounded-2xl p-6 max-w-md mx-auto">
+                    <CardHeader className="p-0 text-center">
+                        <CardTitle className="text-xl">Get Feedback</CardTitle>
+                        <CardDescription className="text-gray-400">
+                            Get personalized expense feedback in one-click
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-0 mt-6">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <Label htmlFor="start-date">Start Date</Label>
+                                <Input 
+                                    id="start-date" 
+                                    type="date" 
+                                    value={startDate}
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                    className="bg-white/5 border-gray-600 mt-1" 
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="end-date">End Date</Label>
+                                <Input 
+                                    id="end-date" 
+                                    type="date" 
+                                    value={endDate}
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                    className="bg-white/5 border-gray-600 mt-1" 
+                                />
+                            </div>
+                            <Button type="submit" className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3">
+                                {isLoading ? 'Generating...' : 'Submit'}
+                            </Button>
+                        </form>
+                    </CardContent>
+                </Card>
+
+                {hasSubmitted && (
+                    <Card className="bg-[#1C2A3A] border border-white/10 rounded-2xl p-6 max-w-md mx-auto mt-6">
+                        <CardHeader className="p-0">
+                            <CardTitle className="text-xl">Your Personalized Expense Feedback are here:</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-0 mt-4 text-gray-300">
+                            {isSubscribed && feedback ? (
+                                <>
+                                    <h4 className="font-semibold text-white">Income Overview:</h4>
+                                    <p>Monthly Salary: $5,000</p>
+                                    <p>Current Savings: $1,200</p>
+                                    <p>Savings Goal: $10,000</p>
+                                    <br />
+                                    <h4 className="font-semibold text-white">Expense Analysis:</h4>
+                                    <p>{feedback}</p>
+                                </>
+                            ) : (
+                                <div className="text-center py-8 flex flex-col items-center justify-center blur-sm backdrop-blur-sm">
+                                    <Lock size={40} className="text-gray-500 mb-4" />
+                                    <h4 className="font-semibold text-white">Subscribe to Unlock</h4>
+                                    <p className="text-gray-400">This feature is available for premium users.</p>
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+                )}
+            </main>
+
+            <SubscriptionPopup open={isPopupOpen} onOpenChange={setIsPopupOpen} />
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default MyFeedBack;
+export default AIFeedbackPage;

@@ -13,6 +13,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { useTheme } from "next-themes";
+import { Button } from "./ui/button";
 
 type SidebarProps = {
   onClose?: () => void;
@@ -20,18 +22,19 @@ type SidebarProps = {
 
 export default function Sidebar({ onClose }: SidebarProps) {
   const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
 
+  // PERBAIKAN: Menyesuaikan href dengan struktur folder Anda
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "My Profile", href: "/profile", icon: User },
-    { name: "Budgeting", href: "/budgeting", icon: CreditCard },
-    { name: "Investment", href: "/investment", icon: LineChart },
-    { name: "Expenses", href: "/expenses", icon: Wallet },
-    { name: "AI Feedback", href: "/feedback", icon: MessageCircle },
+    { name: "My Profile", href: "/my-profile", icon: User },
+    { name: "Budgeting", href: "/my-budget", icon: CreditCard },
+    { name: "Investment", href: "/my-investment", icon: LineChart },
+    { name: "Expenses", href: "/my-expenses", icon: Wallet },
+    { name: "AI Feedback", href: "/my-feedback", icon: MessageCircle },
   ];
 
   return (
-    // Kelas untuk menyembunyikan di mobile diletakkan di sini
     <aside className="hidden lg:flex flex-col h-full bg-[#091C2D] text-gray-200 p-4 w-64 border-r border-white/10">
       <div className="flex items-center gap-2 mb-5 justify-center">
         <img src="/pennywise-logo.png" alt="logo" className="h-12 w-12" />
@@ -44,7 +47,6 @@ export default function Sidebar({ onClose }: SidebarProps) {
           const active = pathname.startsWith(item.href);
 
           return (
-            // Tag <aside> yang salah sudah dihapus dari sini
             <Link
               key={item.name}
               href={item.href}
@@ -65,21 +67,23 @@ export default function Sidebar({ onClose }: SidebarProps) {
       <div className="border-t border-gray-700 my-4" />
 
       <div className="flex flex-col gap-2">
-        <button
-          onClick={() => alert("Switch theme clicked")}
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 hover:bg-[#132E4D] hover:text-white"
+        <Button
+          variant="ghost"
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="flex items-center justify-start gap-3 rounded-lg px-3 py-2 text-gray-300 hover:bg-[#132E4D] hover:text-white"
         >
           <Moon size={18} />
           Switch Theme
-        </button>
+        </Button>
 
-        <button
+        <Button
+          variant="ghost"
           onClick={() => signOut()}
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 hover:bg-[#132E4D] hover:text-white"
+          className="flex items-center justify-start gap-3 rounded-lg px-3 py-2 text-gray-300 hover:bg-[#132E4D] hover:text-white"
         >
           <LogOut size={18} />
           Logout
-        </button>
+        </Button>
       </div>
     </aside>
   );
