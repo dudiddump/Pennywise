@@ -25,12 +25,12 @@ export default function Sidebar({ onClose }: SidebarProps) {
   const { theme, setTheme } = useTheme();
   
   const navItems = [
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "My Profile", href: "/my-profile", icon: User },
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Budgeting", href: "/my-budget", icon: CreditCard },
-    { name: "Investment", href: "/my-investment", icon: LineChart },
     { name: "Expenses", href: "/my-expenses", icon: Wallet },
-    { name: "AI Feedback", href: "/my-feedback", icon: MessageCircle },
+    { name: "Investment", href: "/my-investment", icon: LineChart },
+    { name: "AI Chatbot", href: "/my-ai-chat", icon: MessageCircle },
   ];
 
   return (

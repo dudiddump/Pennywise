@@ -40,7 +40,7 @@
     "fs": "^0.0.1-security",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.427.0",
-    "mongodb": "^6.18.0",
+    "mongodb": "^6.19.0",
     "mongoose": "^8.5.3",
     "next": "^14.2.31",
     "next-auth": "^4.24.7",

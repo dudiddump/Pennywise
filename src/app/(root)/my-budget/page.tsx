@@ -193,6 +193,8 @@ const MyBudgetPage = () => {
                 <th scope="col" className="px-6 py-3">Category</th>
                 <th scope="col" className="px-6 py-3">Spent</th>
                 <th scope="col" className="px-6 py-3">Limit</th>
+                <th scope="col" className="px-6 py-3">Edit</th>
+                <th scope="col" className="px-6 py-3">Delete</th>
               </tr>
             </thead>
             <tbody>
