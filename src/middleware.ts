@@ -8,36 +8,19 @@ export async function middleware(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  const path = request.nextUrl.pathname;
-
-  const isPublicRoute = ["/", "/sign-in", "/sign-up", "/home"].includes(path);
-  const isVerifyRoute = path.startsWith("/verify/");
-
-  if (isVerifyRoute) {
-    return NextResponse.next();
-  }
-
-  if (path === "/" && !token) {
-    return NextResponse.next();
-  }
-
-  if ((path === "/sign-in" || path === "/sign-up") && token) {
+  const { pathname } = request.nextUrl;
+  
+  if (token && (pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up"))) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
-
-  if (path === "/home" && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
-  if (!isPublicRoute && path.startsWith("/dashboard") && !token) {
+  
+  if (!token && pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
-
+  
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|public).*)",
-  ],
+  matcher: ["/dashboard/:path*", "/sign-in", "/sign-up"],
 };
