@@ -18,9 +18,11 @@ import { Button } from "./ui/button";
 
 type SidebarProps = {
   onClose?: () => void;
+  onToggleSidebar?: () => void;
+  isSidebarCollapsed?: boolean;
 };
 
-export default function Sidebar({ onClose }: SidebarProps) {
+export default function Sidebar({ onClose = () => {}, onToggleSidebar = () => {}, isSidebarCollapsed = false }: SidebarProps) {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   
@@ -34,9 +36,13 @@ export default function Sidebar({ onClose }: SidebarProps) {
   ];
 
   return (
-    <aside className="hidden lg:flex flex-col h-full bg-[#091C2D] text-gray-200 p-4 w-64 border-r border-white/10">
+    <aside className={`hidden lg:flex flex-col h-full bg-white dark:bg-[#091C2D] text-gray-900 dark:text-gray-200 p-4 border-r border-gray-200 dark:border-white/10 transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}>
       <div className="flex items-center gap-2 mb-5 justify-center">
-        <img src="/pennywise-logo.png" alt="logo" className="h-12 w-12" />
+        {isSidebarCollapsed ? (
+          <img src="/pennywise-logo.png" alt="logo" className="h-8 w-8" />
+        ) : (
+          <img src="/pennywise-logo.png" alt="logo" className="h-12 w-12" />
+        )}
       </div>
 
       <nav className="flex-1 space-y-2">
@@ -49,38 +55,38 @@ export default function Sidebar({ onClose }: SidebarProps) {
               key={item.name}
               href={item.href}
               onClick={onClose}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${
+              className={`flex items-center rounded-lg px-3 py-2 transition-colors ${
                 active
                   ? "bg-teal-500 text-white"
-                  : "text-gray-300 hover:bg-[#132E4D] hover:text-white"
-              }`}
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#132E4D] hover:text-gray-900 dark:hover:text-white"
+              } ${isSidebarCollapsed ? 'justify-center' : 'gap-3'}`}
             >
               <Icon size={18} />
-              {item.name}
+              {!isSidebarCollapsed && item.name}
             </Link>
           );
         })}
       </nav>
 
-      <div className="border-t border-gray-700 my-4" />
+      <div className="border-t border-gray-200 dark:border-gray-700 my-4" />
 
       <div className="flex flex-col gap-2">
         <Button
           variant="ghost"
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className="flex items-center justify-start gap-3 rounded-lg px-3 py-2 text-gray-300 hover:bg-[#132E4D] hover:text-white"
+          className={`flex items-center rounded-lg px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#132E4D] hover:text-gray-900 dark:hover:text-white ${isSidebarCollapsed ? 'justify-center' : 'justify-start gap-3'}`}
         >
           <Moon size={18} />
-          Switch Theme
+          {!isSidebarCollapsed && "Switch Theme"}
         </Button>
 
         <Button
           variant="ghost"
           onClick={() => signOut()}
-          className="flex items-center justify-start gap-3 rounded-lg px-3 py-2 text-gray-300 hover:bg-[#132E4D] hover:text-white"
+          className={`flex items-center rounded-lg px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#132E4D] hover:text-gray-900 dark:hover:text-white ${isSidebarCollapsed ? 'justify-center' : 'justify-start gap-3'}`}
         >
           <LogOut size={18} />
-          Logout
+          {!isSidebarCollapsed && "Logout"}
         </Button>
       </div>
     </aside>
