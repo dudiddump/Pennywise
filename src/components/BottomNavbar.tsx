@@ -10,11 +10,11 @@ const BottomNavbar = () => {
     const pathname = usePathname();
 
     const navItems = [
-        { href: "/my-expenses", icon: BarChart2, label: "Expenses" },
-        { href: "/my-budget", icon: DollarSign, label: "Budget" },
+        { href: "/main/my-expenses", icon: BarChart2, label: "Expenses" },
+        { href: "/main/my-budget", icon: DollarSign, label: "Budget" },
         { href: "/dashboard", icon: Home, label: "Home" },
-        { href: "/my-investment", icon: LineChart, label: "Investment" },
-        { href: "/my-ai-chat", icon: MessageSquare, label: "Chat AI" },
+        { href: "/main/my-investment", icon: LineChart, label: "Investment" },
+        { href: "/main/my-ai-chat", icon: MessageSquare, label: "Chat AI" },
     ];
 
     const [activeIndex, setActiveIndex] = useState(2);
