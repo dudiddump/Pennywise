@@ -41,12 +41,20 @@ const VerifyAccount = () => {
         code: data.code,
       });
 
-      toast({
-        title: "Success",
-        description: response.data.message,
-      });
+      if (response.data.success) {
+        toast({
+          title: "Success",
+          description: response.data.message,
+        });
+        router.replace("/sign-in");
+      } else {
+        toast({
+          title: "Verification Failed",
+          description: response.data.message,
+          variant: "destructive",
+        });
+      }
 
-      router.replace("/sign-in");
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
@@ -62,7 +70,6 @@ const VerifyAccount = () => {
   };
   
   const handleResend = async () => {
-    // Implement resend logic here
     toast({
         title: "OTP Resent",
         description: "A new OTP has been sent to your email.",
@@ -71,11 +78,9 @@ const VerifyAccount = () => {
 
   return (
     <div className="relative min-h-screen w-full bg-[#091C2D] text-white flex flex-col font-poppins overflow-hidden">
-      {/* Background radial gradient effects */}
       <div className="absolute top-[-25%] left-[-25%] w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_rgba(22,163,74,0.2)_0%,_transparent_60%)] -z-0"></div>
       <div className="absolute bottom-[-25%] right-[-25%] w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.15)_0%,_transparent_60%)] -z-0"></div>
 
-      {/* Header with Back button */}
       <header className="absolute top-0 left-0 p-6 z-20">
         <Button variant="ghost" onClick={() => router.back()} className="hover:bg-white/10 text-white p-2 flex items-center">
             <ArrowLeft className="w-5 h-5 mr-1" />
