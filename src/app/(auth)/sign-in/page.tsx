@@ -153,7 +153,7 @@ function SignInForm() {
           <Button
               variant="outline"
               onClick={handleGoogleSignIn}
-              className="w-full border-2 border-[#34D399] text-white font-bold py-3 h-12 text-base rounded-lg hover:bg-[#34D399] hover:text-[#0D1117] transition-all duration-300 transform hover:scale-105"
+              className="w-full border-2 border-[#34D399] text-black font-bold py-3 h-12 text-base rounded-lg hover:bg-[#34D399] hover:text-[#0D1117] transition-all duration-300 transform hover:scale-105"
           >
               <GoogleIcon />
               Continue with Google
