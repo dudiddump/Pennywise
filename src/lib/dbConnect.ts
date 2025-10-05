@@ -13,18 +13,27 @@ async function dbConnect(): Promise<void> {
     return;
   }
 
+  const uri = process.env.MONGODB_URI;
+  
+  if (!uri) {
+    console.error("MONGODB_URI is not defined in environment variables");
+    throw new Error("Please define the MONGODB_URI environment variable");
+  }
+  
+  if (!uri.startsWith('mongodb://') && !uri.startsWith('mongodb+srv://')) {
+    console.error("Invalid MongoDB URI format");
+    throw new Error("MONGODB_URI must start with mongodb:// or mongodb+srv://");
+  }
+
   try {
-    // Attempt to connect to the database
-    const db = await mongoose.connect(process.env.MONGODB_URI || "", {});
+    const db = await mongoose.connect(uri);
 
     connection.isConnected = db.connections[0].readyState;
 
     console.log("Database connected successfully");
   } catch (error) {
     console.error("Database connection failed:", error);
-
-    // Graceful exit in case of a connection error
-    process.exit(1);
+    throw error;
   }
 }
 
