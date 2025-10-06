@@ -16,7 +16,7 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/icons/customer-feedback.svg",
-    route: "/my-feedback",
+    route: "/main/my-ai-chat",
     label: "AI Feedback",
   },
   {

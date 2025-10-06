@@ -28,6 +28,7 @@ import { FaPlus, FaPiggyBank, FaArrowDown, FaArrowUp } from "react-icons/fa";
 import CustomCard from "@/components/CustomCard"; 
 import LatestExpensesTable from "@/components/LatestExpenseTable";
 import CustomPieChart from "@/components/chart/CustomPieChart";
+import CustomLineChart from "@/components/chart/CustomLineChart";
 
 interface DashboardData {
   totalExpenses: number;
@@ -153,14 +154,15 @@ const Dashboard = () => {
               />
             </div>
 
-            <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-xl hover:shadow-[#3B82F6]/30 transition">
+            // In the Transaction Chart section:
+            <Card className="bg-white/5 border-white/10 rounded-2xl text-white shadow-xl hover:shadow-[#3B82F6]/30 transition dark:bg-[#0F2334]/90 dark:border-white/10">
               <CardHeader className="flex flex-row justify-between items-center">
                 <CardTitle className="text-2xl font-bold">Transaction Chart</CardTitle>
                 <Select onValueChange={setChartTimeFrame} defaultValue={chartTimeFrame}>
-                  <SelectTrigger className="w-[180px] bg-transparent border-white/20">
+                  <SelectTrigger className="w-[180px] bg-transparent border-white/20 dark:bg-[#0F2334] dark:text-white">
                     <SelectValue placeholder="Select Time" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#0F2334] text-white border-white/20">
+                  <SelectContent className="bg-white dark:bg-[#0F2334] text-gray-900 dark:text-white border-gray-200 dark:border-white/20">
                     <SelectItem value="last 7 days">Last 7 days</SelectItem>
                     <SelectItem value="last 30 days">Last 30 days</SelectItem>
                     <SelectItem value="last year">Last year</SelectItem>
@@ -168,7 +170,7 @@ const Dashboard = () => {
                 </Select>
               </CardHeader>
               <CardContent className="text-center h-80 flex items-center justify-center">
-                  <CustomPieChart />
+                <CustomLineChart range={chartTimeFrame} />
               </CardContent>
             </Card>
 

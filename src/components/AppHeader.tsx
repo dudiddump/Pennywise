@@ -1,6 +1,5 @@
 "use client";
 
-import { useSidebar } from "@/context/SidebarContext";
 import { useCurrency } from "@/context/CurrencyProvider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,7 +9,6 @@ import {
   Settings,
   Lock,
   LogOut,
-  Menu,
 } from "lucide-react";
 import Image from "next/image";
 import {
@@ -25,8 +23,6 @@ import { signOut, useSession } from "next-auth/react";
 import MobileNav from "./MobileNav";
 
 const AppHeader = () => {
-  const { toggleSidebar } = useSidebar();
-
   const pathname = usePathname();
   const { data: session } = useSession();
   const { currency, setCurrency } = useCurrency();
@@ -48,17 +44,6 @@ const AppHeader = () => {
         <div className="flex items-center gap-4">
           <div className="lg:hidden">
             <MobileNav />
-          </div>
-
-          <div className="hidden lg:block">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleSidebar}
-              className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10"
-            >
-              <Menu size={20} />
-            </Button>
           </div>
 
           <Link href="/dashboard" className="flex items-center">

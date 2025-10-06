@@ -12,6 +12,7 @@ import {
   MessageCircle,
   Moon,
   LogOut,
+  Menu,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
@@ -19,7 +20,7 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 
 export default function Sidebar() {
-  const { isSidebarCollapsed } = useSidebar();
+  const { isSidebarCollapsed, toggleSidebar } = useSidebar();
   
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
@@ -37,6 +38,18 @@ export default function Sidebar() {
     <aside className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-white dark:bg-[#091C2D] text-gray-900 dark:text-gray-200 border-r border-gray-200 dark:border-white/10 transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-64'} z-30`}>
       
       <div className="flex flex-col h-full p-4">
+        {/* Hamburger button at the top of sidebar */}
+        <div className="flex justify-end mb-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleSidebar}
+            className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10"
+          >
+            <Menu size={20} />
+          </Button>
+        </div>
+        
         <div className="flex items-center gap-2 mb-6 justify-center">
           {session?.user?.image ? (
             <Image
@@ -53,7 +66,7 @@ export default function Sidebar() {
           )}
           {!isSidebarCollapsed && (
             <div className="flex flex-col">
-              <span className="font-medium text-sm">{session?.user?.name || 'User'}</span>
+              <span className="font-medium text-sm">{session?.user?.username || 'User'}</span>
               <span className="text-xs text-gray-500 dark:text-gray-400">{session?.user?.email || ''}</span>
             </div>
           )}
