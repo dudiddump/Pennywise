@@ -1,56 +1,46 @@
 "use client";
 
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { SidebarProvider } from "@/context/SidebarContext";
+import { CurrencyProvider } from "@/context/CurrencyProvider";
+import AppHeader from "@/components/AppHeader";
 import Sidebar from "@/components/Sidebar";
-import { Menu } from "lucide-react";
+import BottomNavbar from "@/components/BottomNavbar";
 
-const pageTitles: Record<string, string> = {
-  "/": "Dashboard",
-  "/transactions": "Transactions",
-  "/reports": "Reports",
-};
-
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const pathname = usePathname();
-  const title = pageTitles[pathname] || "Page";
-
+export default function MainAppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-[#0B2239] p-4
-          transition-transform duration-300 ease-in-out
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0 md:static md:w-64`}
-      >
-        <Sidebar onClose={() => setSidebarOpen(false)} />
+    // Bungkus semua dengan Provider
+    <CurrencyProvider>
+      <SidebarProvider>
+        <LayoutContent>
+          {children}
+        </LayoutContent>
+      </SidebarProvider>
+    </CurrencyProvider>
+  );
+}
+
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative min-h-screen bg-white dark:bg-[#091C2D] text-gray-900 dark:text-white">
+      <div className="absolute top-0 left-0 -z-10 h-full w-full overflow-hidden">
+        <div className="absolute -top-1/4 -left-1/4 h-[500px] w-[500px] rounded-full bg-[rgba(52,211,153,0.15)] blur-[100px]"></div>
+        <div className="absolute -bottom-1/4 -right-1/4 h-[500px] w-[500px] rounded-full bg-[rgba(59,130,246,0.15)] blur-[100px]"></div>
       </div>
 
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      <div className="flex-1 flex flex-col">
-        <header className="flex items-center justify-between bg-[#0F2A44] px-4 py-3 shadow">
-          <div className="flex items-center gap-3">
-            <img src="/logo.svg" alt="Logo" className="h-6 w-6" />
-            <h1 className="text-lg font-bold">{title}</h1>
-          </div>
-
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-md hover:bg-[#132E4D] focus:outline-none md:hidden"
-          >
-            <Menu size={24} />
-          </button>
-        </header>
-
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+      <div className="flex h-screen">
+        <div className="hidden lg:block">
+          <Sidebar />
+        </div>
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <AppHeader />
+          <main className="flex-1 overflow-y-auto pb-24 lg:pb-0">
+            {children}
+          </main>
+        </div>
       </div>
-    </>
+      <div className="lg:hidden">
+        <BottomNavbar />
+      </div>
+    </div>
   );
 }

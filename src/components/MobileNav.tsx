@@ -23,11 +23,10 @@ import { signOut } from "next-auth/react";
 
 const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "My Profile", href: "/my-profile", icon: User },
-    { name: "Budgeting", href: "/my-budget", icon: CreditCard },
-    { name: "Investment", href: "/my-investment", icon: LineChart },
-    { name: "Expenses", href: "/my-expenses", icon: Wallet },
-    { name: "AI Feedback", href: "/my-feedback", icon: MessageCircle },
+    { name: "Budgeting", href: "/main/my-budget", icon: CreditCard },
+    { name: "Expenses", href: "/main/my-expenses", icon: Wallet },
+    { name: "Investment", href: "/main/my-investment", icon: LineChart },
+    { name: "AI Chatbot", href: "/main/my-ai-chat", icon: MessageCircle },
 ];
 
 const MobileNav = () => {

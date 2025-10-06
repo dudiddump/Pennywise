@@ -1,43 +1,30 @@
-'use client'
+"use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-type Currency = 'USD' | 'MYR' | 'IDR'
+export type Currency = 'USD' | 'IDR' | 'MYR';
 
-type CurrencyContextType = {
-  currency: Currency
-  setCurrency: (currency: Currency) => void
+interface CurrencyContextType {
+  currency: Currency;
+  setCurrency: (currency: Currency) => void;
 }
 
-const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined)
+const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
-export function CurrencyProvider({ children }: { children: ReactNode }) {
-  const [currency, setCurrency] = useState<Currency>('USD')
-
-  useEffect(() => {
-    // Load currency from localStorage on initial load
-    const savedCurrency = localStorage.getItem('currency') as Currency | null
-    if (savedCurrency && ['USD', 'MYR', 'IDR'].includes(savedCurrency)) {
-      setCurrency(savedCurrency)
-    }
-  }, [])
-
-  useEffect(() => {
-    // Save currency to localStorage whenever it changes
-    localStorage.setItem('currency', currency)
-  }, [currency])
+export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
+  const [currency, setCurrency] = useState<Currency>('IDR');
 
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency }}>
       {children}
     </CurrencyContext.Provider>
-  )
-}
+  );
+};
 
-export function useCurrency() {
-  const context = useContext(CurrencyContext)
-  if (context === undefined) {
-    throw new Error('useCurrency must be used within a CurrencyProvider')
+export const useCurrency = () => {
+  const context = useContext(CurrencyContext);
+  if (!context) {
+    throw new Error('useCurrency must be used within a CurrencyProvider');
   }
-  return context
-}
+  return context;
+};

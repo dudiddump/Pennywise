@@ -17,28 +17,16 @@ const BottomNavbar = () => {
         { href: "/main/my-ai-chat", icon: MessageSquare, label: "Chat AI" },
     ];
 
-    const [activeIndex, setActiveIndex] = useState(2);
-    
-    useEffect(() => {
-        const sortedItems = [...navItems].sort((a, b) => b.href.length - a.href.length);
-        const newActiveIndex = sortedItems.findIndex(item => pathname.startsWith(item.href));
-        
-        if (newActiveIndex !== -1) {
-            const originalIndex = navItems.findIndex(item => item.href === sortedItems[newActiveIndex].href);
-            setActiveIndex(originalIndex);
-        }
-    }, [pathname]);
-
     return (
         <footer className="fixed bottom-0 left-0 right-0 z-50 bg-[#0F2334] border-t border-white/10 px-1 lg:hidden">
             <div className="relative flex justify-around items-end h-14">
                 {navItems.map((item, index) => {
-                    const isActive = activeIndex === index;
+                    const isActive = (item.href === '/dashboard' && pathname === item.href) || (item.href !== '/dashboard' && pathname.startsWith(item.href));
+
                     return (
                         <Link
                             href={item.href}
                             key={item.href}
-                            onClick={() => setActiveIndex(index)}
                             className="flex flex-col items-center justify-end w-1/5 h-full"
                         >
                             <div className={cn(

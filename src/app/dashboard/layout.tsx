@@ -1,21 +1,24 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from "react";
+import { SidebarProvider, useSidebar } from "@/context/SidebarContext";
+import { CurrencyProvider } from "@/context/CurrencyProvider";
 import AppHeader from "@/components/AppHeader";
 import Sidebar from "@/components/Sidebar";
 import BottomNavbar from "@/components/BottomNavbar";
 
-export default function MainAppLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  
-  const toggleSidebar = () => {
-    setIsSidebarCollapsed(!isSidebarCollapsed);
-  };
+export default function MainAppLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <CurrencyProvider>
+      <SidebarProvider>
+        <LayoutContent>{children}</LayoutContent>
+      </SidebarProvider>
+    </CurrencyProvider>
+  );
+}
+
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  const { isSidebarCollapsed } = useSidebar();
 
   return (
     <div className="relative min-h-screen bg-white dark:bg-[#091C2D] text-gray-900 dark:text-white">
@@ -25,23 +28,21 @@ export default function MainAppLayout({
       </div>
 
       <div className="flex h-screen">
-        <Sidebar
-          onToggleSidebar={toggleSidebar}
-          isSidebarCollapsed={isSidebarCollapsed}
-          onClose={() => {}}
-        />
+        <div className="hidden lg:block">
+          <Sidebar />
+        </div>
         
-        <div className="flex flex-col flex-1 overflow-hidden">
-          <AppHeader
-            onToggleSidebar={toggleSidebar}
-            isSidebarCollapsed={isSidebarCollapsed}
-          />
+        <div className={`flex flex-col flex-1 overflow-hidden transition-all duration-300 ${isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
+          <AppHeader />
           <main className="flex-1 overflow-y-auto pb-24 lg:pb-0">
             {children}
           </main>
         </div>
       </div>
-      <BottomNavbar />
+
+      <div className="lg:hidden">
+        <BottomNavbar />
+      </div>
     </div>
   );
 }

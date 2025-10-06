@@ -24,24 +24,22 @@ export default function MainAppLayout({
         <div className="absolute -bottom-1/4 -right-1/4 h-[500px] w-[500px] rounded-full bg-[rgba(59,130,246,0.15)] blur-[100px]"></div>
       </div>
 
-      <div className="flex h-screen">
-        <Sidebar
-          onToggleSidebar={toggleSidebar}
-          isSidebarCollapsed={isSidebarCollapsed}
-          onClose={() => {}}
-        />
+       <div className="flex h-screen">
+        <div className="hidden lg:block">
+          <Sidebar />
+        </div>
         
-        <div className="flex flex-col flex-1 overflow-hidden">
-          <AppHeader
-            onToggleSidebar={toggleSidebar}
-            isSidebarCollapsed={isSidebarCollapsed}
-          />
+        <div className={`flex flex-col flex-1 overflow-hidden transition-all duration-300 ${isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
+          <AppHeader />
           <main className="flex-1 overflow-y-auto pb-24 lg:pb-0">
             {children}
           </main>
         </div>
       </div>
-      <BottomNavbar />
+
+      <div className="lg:hidden">
+        <BottomNavbar />
+      </div>
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, Mail } from 'lucide-react';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
+import { useCurrency } from '@/context/CurrencyProvider';
 
 const profileSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -22,11 +23,12 @@ const profileSchema = z.object({
   savingsPercentage: z.number().min(0, "Percentage must be between 0 and 100").max(100),
 });
 
-const MyProfilePage = () => {
+  const MyProfilePage = () => {
   const { data: session, update } = useSession();
   const user: User = session?.user as User;
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const { currency } = useCurrency(); // <-- PERUBAHAN 2: Panggil hook untuk dapatkan currency
 
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
@@ -130,7 +132,7 @@ const MyProfilePage = () => {
                         name="monthlySalary"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Monthly Salary ($)</FormLabel>
+                                <FormLabel>Monthly Salary ({currency})</FormLabel>
                                 <FormControl>
                                     <Input type="number" className="bg-white/5 border-gray-600" {...field} onChange={e => field.onChange(Number(e.target.value))}/>
                                 </FormControl>
